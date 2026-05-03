@@ -1,0 +1,55 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<div id="header" class="bg-dark py-4">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-10 row">
+
+                <!-- Logo + Title -->
+                <div class="col-md-3 d-flex align-items-center text-light">
+                    <img src="${pageContext.request.contextPath}/images/logos/logo.jpg" 
+                         width="60"
+                         height="60"
+                         class="ms-5 rounded"
+                         alt="logo">
+                    <a class="mb-0 h3 ms-4 text-light text-decoration-none" href="welcome">Pixel Mart</a>
+                </div>
+
+                <!--Deals and stuff-->
+                <div class="col-md-5 d-flex text-center align-items-center text-light">
+                    <div class="h5 mb-0 col-md-3">
+                        <select class="rounded-0 border-0 shadow-none bg-dark text-light"
+                                id="category">
+                            <option value="" selected>Category</option>
+                        </select>    
+                    </div>
+                    <div class="col-md-3">
+                        <h5 class="mb-0">Deals</h5>
+                    </div>
+                    <div class="col-md-3">
+                        <h5 class="mb-0">What's New</h5>
+                    </div>
+                    <div class="col-md-3">
+                        <h5 class="mb-0">Delivery</h5>
+                    </div>
+                </div>
+
+                <!--Search Bar-->
+                <div class="col-md-4 px-5">
+                    <div class="btn d-flex">
+                        <input type="text" class="form-control bg-light rounded-0 rounded-start shadow-none border-0 p-2 ps-3" placeholder="Search...">
+                        <i class="bi bi-search bg-light p-2 pe-3 rounded-end"></i>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Navigation Bar Button -->
+            <div class="col-md-2 text-center"
+                 id="navbutton">
+            </div>
+        </div>
+    </div>
+</div>

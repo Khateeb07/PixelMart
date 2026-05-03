@@ -1,0 +1,233 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<div class="container my-5">
+
+    <h3 class="fw-bold mb-3">Shop by category</h3>
+
+    <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+
+        <!-- Carousel inner -->
+        <div class="carousel-inner">
+
+            <!-- Slide 1 -->
+            <div class="carousel-item active">
+
+                <div class="row g-3">
+
+                    <!-- Product 1 -->
+                    <div class="col-md-2">
+                        <a class="card border-0" href="subcat">
+                            <img src="${pageContext.request.contextPath}/images/catdisplay/catimg1.png"
+                                 class="card-img-top img-fluid"
+                                 style="width:200px; object-fit:contain;">
+                        </a>
+                    </div>
+
+                    <!-- Product 2 -->
+                    <div class="col-md-2">
+                        <a class="card border-0" href="subcat">
+                            <img src="${pageContext.request.contextPath}/images/catdisplay/catimg2.png"
+                                 class="card-img-top img-fluid"
+                                 style="width:200px; object-fit:contain;">
+                        </a>
+                    </div>
+
+                    <!-- Product 3 -->
+                    <div class="col-md-2">
+                        <a class="card border-0" href="subcat">
+                            <img src="${pageContext.request.contextPath}/images/catdisplay/catimg3.png"
+                                 class="card-img-top img-fluid"
+                                 style="width:200px; object-fit:contain;">
+                        </a>
+                    </div>
+
+                    <!-- Product 4 -->
+                    <div class="col-md-2">
+                        <a class="card border-0" href="subcat">
+                            <img src="${pageContext.request.contextPath}/images/catdisplay/catimg4.png"
+                                 class="card-img-top img-fluid"
+                                 style="width:200px; object-fit:contain;">
+                        </a>
+                    </div>
+
+                    <!-- Product 5 -->
+                    <div class="col-md-2">
+                        <a class="card border-0" href="subcat">
+                            <img src="${pageContext.request.contextPath}/images/catdisplay/catimg5.png"
+                                 class="card-img-top img-fluid"
+                                 style="width:200px; object-fit:contain;">
+                        </a>
+                    </div>
+
+                    <!-- Product 6 -->
+                    <div class="col-md-2">
+                        <a class="card border-0" href="subcat">
+                            <img src="${pageContext.request.contextPath}/images/catdisplay/catimg6.png"
+                                 class="card-img-top img-fluid"
+                                 style="width:200px; object-fit:contain;">
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="carousel-item">
+
+                <div class="row g-3">
+
+                    <!-- Next 6 products -->
+                    
+                    <!--Product 7-->
+                    <div class="col-md-2">
+                        <a class="card border-0" href="subcat">
+                            <img src="${pageContext.request.contextPath}/images/catdisplay/catimg7.png"
+                                 class="card-img-top img-fluid"
+                                 style="width:200px; object-fit:contain;">
+                        </a>
+                    </div>
+                    
+                    <!--Product 8-->
+                    <div class="col-md-2">
+                        <a class="card border-0" href="subcat">
+                            <img src="${pageContext.request.contextPath}/images/catdisplay/catimg8.png"
+                                 class="card-img-top img-fluid"
+                                 style="width:200px; object-fit:contain;">
+                        </a>
+                    </div>
+                    
+                    <!--Product 9-->
+                    <div class="col-md-2">
+                        <a class="card border-0" href="subcat">
+                            <img src="${pageContext.request.contextPath}/images/catdisplay/catimg9.png"
+                                 class="card-img-top img-fluid"
+                                 style="width:200px; object-fit:contain;">
+                        </a>
+                    </div>
+                                 
+                    <!--Product 10-->
+                    <div class="col-md-2">
+                        <a class="card border-0" href="subcat">
+                            <img src="${pageContext.request.contextPath}/images/catdisplay/catimg10.png"
+                                 class="card-img-top img-fluid"
+                                 style="width:200px; object-fit:contain;">
+                        </a>
+                    </div>
+                                 
+                    <!--Product 11-->
+                    <div class="col-md-2">
+                        <a class="card border-0" href="subcat">
+                            <img src="${pageContext.request.contextPath}/images/catdisplay/catimg11.png"
+                                 class="card-img-top img-fluid"
+                                 style="width:200px; object-fit:contain;">
+                        </a>
+                    </div>
+                                 
+                    <!--Product 12-->
+                    <div class="col-md-2">
+                        <a class="card border-0" href="subcat">
+                            <img src="${pageContext.request.contextPath}/images/catdisplay/catimg12.png"
+                                 class="card-img-top img-fluid"
+                                 style="width:200px; object-fit:contain;">
+                        </a>
+                    </div>
+
+                    
+                </div>
+
+            </div>
+                                 
+            <!-- Slide 3 -->
+            <div class="carousel-item">
+
+                <div class="row g-3">
+
+                    <!-- Next 6 products -->
+                    
+                    <!--Product 13-->
+                    <div class="col-md-2">
+                        <a class="card border-0" href="subcat">
+                            <img src="${pageContext.request.contextPath}/images/catdisplay/catimg13.png"
+                                 class="card-img-top img-fluid"
+                                 style="width:200px; object-fit:contain;">
+                        </a>
+                    </div>
+                    
+                    <!--Product 14-->
+                    <div class="col-md-2">
+                        <a class="card border-0" href="subcat">
+                            <img src="${pageContext.request.contextPath}/images/catdisplay/catimg14.png"
+                                 class="card-img-top img-fluid"
+                                 style="width:200px; object-fit:contain;">
+                        </a>
+                    </div>
+                    
+                    <!--Product 15-->
+                    <div class="col-md-2">
+                        <a class="card border-0" href="subcat">
+                            <img src="${pageContext.request.contextPath}/images/catdisplay/catimg15.png"
+                                 class="card-img-top img-fluid"
+                                 style="width:200px; object-fit:contain;">
+                        </a>
+                    </div>
+                                 
+                    <!--Product 16-->
+                    <div class="col-md-2">
+                        <a class="card border-0" href="subcat">
+                            <img src="${pageContext.request.contextPath}/images/catdisplay/catimg16.png"
+                                 class="card-img-top img-fluid"
+                                 style="width:200px; object-fit:contain;">
+                        </a>
+                    </div>
+                                 
+                    <!--Product 17-->
+                    <div class="col-md-2">
+                        <a class="card border-0" href="subcat">
+                            <img src="${pageContext.request.contextPath}/images/catdisplay/catimg17.png"
+                                 class="card-img-top img-fluid"
+                                 style="width:200px; object-fit:contain;">
+                        </a>
+                    </div>
+                                 
+                    <!--Product 18-->
+                    <div class="col-md-2">
+                        <a class="card border-0" href="subcat">
+                            <img src="${pageContext.request.contextPath}/images/catdisplay/catimg18.png"
+                                 class="card-img-top img-fluid"
+                                 style="width:200px; object-fit:contain;">
+                        </a>
+                    </div>
+
+                    
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Controls -->
+        <button class="carousel-control-prev"
+                style="width: 5%;"
+                type="button"
+                data-bs-target="#productCarousel"
+                data-bs-slide="prev">
+
+            <span class="carousel-control-prev-icon bg-dark rounded"></span>
+
+        </button>
+
+        <button class="carousel-control-next"
+                style="width: 5%;"
+                type="button"
+                data-bs-target="#productCarousel"
+                data-bs-slide="next">
+
+            <span class="carousel-control-next-icon bg-dark rounded"></span>
+
+        </button>
+
+    </div>
+
+</div>
+
