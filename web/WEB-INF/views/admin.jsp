@@ -61,11 +61,25 @@
                                 </div>
 
                                 <div class="col-md-4 mb-3">
-                                    <div class="border rounded p-4 h-100">
-                                        <h5 class="mb-2">Reports</h5>
+                                    <div role="button" class="border rounded p-4 h-100" onclick="fetchApiImportProducts();">
+                                        <h5 class="mb-2">Import Products</h5>
                                         <p class="text-muted small">
-                                            View platform statistics.
+                                            Fetch API and import all products.
                                         </p>
+                                        <div id="importSpinner" class="d-none mt-3">
+
+                                            <div class="spinner-border text-primary"
+                                                 role="status">
+                                            </div>
+
+                                            <p class="mt-2 text-muted">
+                                                Importing products...
+                                            </p>
+
+                                        </div>
+                                        <div id="importStatus"
+                                             class="mt-2 fw-bold">
+                                        </div>
                                     </div>
                                 </div>
 

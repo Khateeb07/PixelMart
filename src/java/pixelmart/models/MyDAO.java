@@ -4,6 +4,7 @@
  */
 package pixelmart.models;
 
+import pixelmart.beans.Product;
 import java.sql.*;
 import java.io.*;
 
@@ -39,6 +40,35 @@ public class MyDAO {
     }
 
     public void toFetch2(PreparedStatement pstm) throws SQLException {
-        pstm.execute();
+        pstm.executeUpdate();
+    }
+    
+    public Product getProductById(int pid) {
+        Product prod = null;
+        try {
+            String selectProductQuery = "SELECT * FROM product_table WHERE (product_id=?)";
+            PreparedStatement pstm = con.prepareStatement(selectProductQuery);
+            pstm.setInt(1, pid);
+            ResultSet rs = pstm.executeQuery();
+            if(rs.next()) {
+                prod = new Product();
+                prod.setProductId(pid);
+                prod.setProductName(rs.getString("product_name"));
+                prod.setProductSubcategoryId(rs.getInt("product_subcategory_id"));
+                prod.setProductPrice(rs.getDouble("product_price"));
+                prod.setProductImagePath(rs.getString("product_image_path"));
+                prod.setProductDescription(rs.getString("product_description"));
+                prod.setProductBrand(rs.getString("product_brand"));
+                prod.setProductWarranty(rs.getString("product_warranty"));
+                prod.setProductQuantity(rs.getLong("product_quantity"));
+                prod.setProductDiscount(rs.getDouble("product_discount"));
+                prod.setProductSellingPrice(rs.getDouble("product_selling_price"));
+                prod.setProductDimensions(rs.getString("product_dimensions"));
+                prod.setProductWeight(rs.getDouble("product_weight"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return prod;
     }
 }

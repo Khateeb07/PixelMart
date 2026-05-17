@@ -167,16 +167,24 @@ let loadProducts = function () {
                                         href: "proddisp"
                                     },
                                     React.createElement(
-                                            "div", {
-                                                style: {height: "18rem"},
-                                                className: "d-flex align-items-center justify-content-center p-1"
+                                            "div",
+                                            {
+                                                style: {
+                                                    height: "16rem"
+                                                    //overflow: "hidden"
+                                                },
+                                                className: "d-flex align-items-center justify-content-center p-2"
                                             },
                                             React.createElement(
-                                                    "img", {
+                                                    "img",
+                                                    {
                                                         src: `data:image/${obj.type};base64,${obj.product_image_data}`,
-                                                        width: "800",
-                                                        className: "img-fluid",
-                                                        alt: `${obj.product_name}`
+                                                        alt: `${obj.product_name}`,
+                                                        style: {
+                                                            maxWidth: "100%",
+                                                            maxHeight: "15rem",
+                                                            objectFit: "contain"
+                                                        }
                                                     })
                                             ),
                                     React.createElement(
@@ -184,9 +192,9 @@ let loadProducts = function () {
                                                 className: "card-body"
                                             },
                                             React.createElement("h5", {className: "card-title"}, obj.product_name),
-                                            //React.createElement("h6", {className: "card-text"}, obj.product_brand),
-                                            React.createElement("h6", {className: "card-text"}, "₹" + obj.product_selling_price),
-                                            React.createElement("p", {className: "card-text"}, obj.product_description)
+                                            React.createElement("h6", {className: "card-text"}, obj.product_brand),
+                                            React.createElement("h6", {className: "card-text"}, /*"₹"*/"$" + obj.product_price),
+                                            React.createElement("p", {className: "card-text"}, obj.product_description.substring(0, 60) + "...")
                                             )
                                     )
                             )
@@ -272,3 +280,53 @@ function navbtn() {
 }
 
 ReactDOM.render(React.createElement(navbtn, null, null), document.getElementById("navbutton"));
+
+let fetchApiImportProducts = function () {
+
+    let spinner =
+            document.getElementById(
+                    "importSpinner"
+                    );
+
+    let status =
+            document.getElementById(
+                    "importStatus"
+                    );
+
+    spinner.classList.remove("d-none");
+
+    status.innerHTML = "";
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function () {
+
+        if (xhr.readyState === 4) {
+
+            spinner.classList.add("d-none");
+
+            if (xhr.status === 200) {
+
+                status.innerHTML =
+                        "✅ Products imported successfully!";
+
+                status.classList.add(
+                        "text-success"
+                        );
+
+            } else {
+
+                status.innerHTML =
+                        "❌ Import failed!";
+
+                status.classList.add(
+                        "text-danger"
+                        );
+            }
+        }
+    };
+    let url = "http://localhost:8080/pixelmart/fc/importprods";
+    xhr.open("GET", url, true);
+
+    xhr.send(null);
+};

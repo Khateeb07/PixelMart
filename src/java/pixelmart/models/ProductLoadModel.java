@@ -30,22 +30,22 @@ public class ProductLoadModel implements Model {
         MyDAO dao = new MyDAO();
         try (PrintWriter out = res.getWriter()) {
             dao.toConnect(driver);
-            String query = "SELECT product_name, product_brand, product_selling_price, product_description, product_image_path FROM product_table WHERE(product_subcategory_id=?);";
+            String query = "SELECT product_name, product_brand, product_price, product_description, product_image_path FROM product_table WHERE(product_subcategory_id=?);";
             PreparedStatement pstm = dao.con.prepareStatement(query);
-            pstm.setInt(1, 102);
+            pstm.setInt(1, 101);
             ResultSet rs = dao.toFetch(pstm);
             JSONArray jsonarr = new JSONArray();
             while (rs.next()) {
                 String pname = rs.getString("product_name");
                 String pbrnd = rs.getString("product_brand");
-                String pslpr = rs.getString("product_selling_price");
+                String pslpr = rs.getString("product_price");
                 String pdesc = rs.getString("product_description");
                 String pimgp = rs.getString("product_image_path");
                 System.out.println(pname + "\t" + pbrnd + "\t" + pslpr + "\t" + pdesc + "\t" + pimgp);
                 JSONObject jsonobj = new JSONObject();
                 jsonobj.put("product_name", pname);
                 jsonobj.put("product_brand", pbrnd);
-                jsonobj.put("product_selling_price", pslpr);
+                jsonobj.put("product_price", pslpr);
                 jsonobj.put("product_description", pdesc);
                 jsonobj.put("product_image_data", encodeImageToBase64(pimgp));
                 jsonarr.add(jsonobj);

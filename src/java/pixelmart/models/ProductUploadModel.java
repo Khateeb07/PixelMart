@@ -20,7 +20,7 @@ import java.sql.*;
  *
  * @author zed
  */
-public class ProductDataModel implements Model {
+public class ProductUploadModel implements Model {
 
     @Override
     public void businessLogic(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
