@@ -164,14 +164,14 @@ let loadProducts = function () {
                             React.createElement(
                                     "a", {
                                         className: "text-decoration-none text-dark",
-                                        href: "proddisp"
+                                        href: `proddisp?id=${obj.product_id}`
                                     },
                                     React.createElement(
                                             "div",
                                             {
                                                 style: {
                                                     height: "16rem"
-                                                    //overflow: "hidden"
+                                                            //overflow: "hidden"
                                                 },
                                                 className: "d-flex align-items-center justify-content-center p-2"
                                             },
@@ -326,6 +326,20 @@ let fetchApiImportProducts = function () {
         }
     };
     let url = "http://localhost:8080/pixelmart/fc/importprods";
+    xhr.open("GET", url, true);
+
+    xhr.send(null);
+};
+
+let productView = function (pid) {
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+            }
+        }
+    };
+    let url = "http://localhost:8080/pixelmart/fc/proddtls?id=" + pid;
     xhr.open("GET", url, true);
 
     xhr.send(null);

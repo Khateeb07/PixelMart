@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    int pid = (Integer)request.getAttribute("id");
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,10 +18,11 @@
     </head>
     <body>
         <%@include file="/WEB-INF/views/components/navbar.jspf" %>
-        <div class="container-fluid row">
+<!--        <div class="container-fluid row" id="showProducts">
             <div class="col-md-6 bg-primary"></div>
             <div class="col-md-6 bg-success"></div>
-        </div>
+        </div>-->
+<p>Product id: <%out.println(pid);%></p>
         <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
         <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
         <script src="${pageContext.request.contextPath}/js/indexpage.js" type="text/javascript"></script>
