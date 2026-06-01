@@ -1,7 +1,7 @@
 <%-- 
     Document   : seller
     Created on : Dec 31, 2025, 2:51:03 PM
-    Author     : zed
+    Author     : khateeb
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8" session="false"%>
@@ -17,6 +17,9 @@
     <head>
         <meta charset="UTF-8">
         <title>Seller Page</title>
+        <link rel="icon"
+              type="image/x-icon"
+              href="${pageContext.request.contextPath}/images/logos/favicon.png">
 
         <!-- Bootstrap CSS -->
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">

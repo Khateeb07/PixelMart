@@ -1,7 +1,7 @@
 <%-- 
     Document   : sellersignup
     Created on : Dec 31, 2025, 2:19:19 PM
-    Author     : zed
+    Author     : khateeb
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8" session="false"%>
@@ -15,6 +15,9 @@
 <html>
     <head>
         <title>Seller Signin</title>
+        <link rel="icon"
+              type="image/x-icon"
+              href="${pageContext.request.contextPath}/images/logos/favicon.png">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>

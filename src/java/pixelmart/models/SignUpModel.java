@@ -14,7 +14,7 @@ import java.io.IOException;
 
 /**
  *
- * @author zed
+ * @author khateeb
  */
 public class SignUpModel implements Model {
 
@@ -25,10 +25,10 @@ public class SignUpModel implements Model {
             String pass = req.getParameter("passup");
             String name = req.getParameter("fname") + " " + req.getParameter("lname");
             String gender = req.getParameter("gender");
-            String driver = "com.mysql.cj.jdbc.Driver";
+            
             MyDAO dao = new MyDAO();
             CallableStatement cstm;
-            dao.toConnect(driver);
+            dao.toConnect();
             cstm = dao.con.prepareCall("Call storeData(?, ?, ?, ?, ?, ?, ?)");
             cstm.setString(1, name);
             cstm.setString(2, email);

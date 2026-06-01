@@ -1,7 +1,7 @@
 <%-- 
     Document   : unverifiedusers
     Created on : Dec 18, 2025, 11:40:48 PM
-    Author     : zed
+    Author     : khateeb
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8" session="false"%>
@@ -10,6 +10,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Verification Page</title>
+        <link rel="icon"
+              type="image/x-icon"
+              href="${pageContext.request.contextPath}/images/logos/favicon.png">
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     </head>

@@ -7,21 +7,30 @@ package pixelmart.models;
 import pixelmart.beans.Product;
 import java.sql.*;
 import java.io.*;
+import java.nio.file.Files;
+import java.util.Base64;
+import java.util.Properties;
 
 /**
  *
- * @author zed
+ * @author khateeb
  */
 public class MyDAO {
 
     Connection con = null;
 
-    public Connection toConnect(String driver) throws ClassNotFoundException, SQLException, IOException {
-        String url = "jdbc:mysql://localhost:3306/ecommdb?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
-        String username = "skywalker";
-        String password = "darthslayer";
-        Class.forName(driver);
-        con = DriverManager.getConnection(url, username, password);
+    public Connection toConnect() throws ClassNotFoundException, SQLException, IOException {
+        Properties props = new Properties();
+        try {
+            props.load(MyDAO.class.getResourceAsStream("db.properties"));
+            String url = props.getProperty("db.url");
+            String username = props.getProperty("db.username");
+            String password = props.getProperty("db.password");
+            Class.forName(props.getProperty("db.driver"));
+            con = DriverManager.getConnection(url, username, password);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return con;
     }
 
@@ -42,7 +51,7 @@ public class MyDAO {
     public void toFetch2(PreparedStatement pstm) throws SQLException {
         pstm.executeUpdate();
     }
-    
+
     public Product getProductById(int pid) {
         Product prod = null;
         try {
@@ -50,7 +59,7 @@ public class MyDAO {
             PreparedStatement pstm = con.prepareStatement(selectProductQuery);
             pstm.setInt(1, pid);
             ResultSet rs = pstm.executeQuery();
-            if(rs.next()) {
+            if (rs.next()) {
                 prod = new Product();
                 prod.setProductId(pid);
                 prod.setProductName(rs.getString("product_name"));
@@ -70,5 +79,11 @@ public class MyDAO {
             e.printStackTrace();
         }
         return prod;
+    }
+    
+    public String encodeImageToBase64(String imagePath) throws Exception {
+        File file = new File(imagePath);
+        byte[] fileContent = Files.readAllBytes(file.toPath());
+        return Base64.getEncoder().encodeToString(fileContent);
     }
 }

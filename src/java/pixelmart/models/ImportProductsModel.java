@@ -28,7 +28,7 @@ import java.security.cert.X509Certificate;
 
 /**
  *
- * @author zed
+ * @author khateeb
  */
 public class ImportProductsModel implements Model {
 
@@ -44,8 +44,7 @@ public class ImportProductsModel implements Model {
             conn.setRequestMethod("GET");
 
             MyDAO dao = new MyDAO();
-            String driver = "com.mysql.cj.jdbc.Driver";
-            dao.toConnect(driver);
+            dao.toConnect();
 
             int responseCode = conn.getResponseCode();
             System.out.println("Response Code: " + responseCode);

@@ -7,6 +7,7 @@ package pixelmart.models;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
@@ -14,7 +15,7 @@ import java.sql.ResultSet;
 
 /**
  *
- * @author zed
+ * @author khateeb
  */
 public class SignInModel implements Model {
 
@@ -23,10 +24,9 @@ public class SignInModel implements Model {
         try {
             String eml = req.getParameter("emailin");
             String pass = req.getParameter("passin");
-            String driver = "com.mysql.cj.jdbc.Driver";
 
             MyDAO dao = new MyDAO();
-            dao.toConnect(driver);
+            dao.toConnect();
             String query = "SELECT password, status, uid FROM ecomm_login WHERE(email=?)";
             PreparedStatement pstm = dao.con.prepareStatement(query);
             pstm.setString(1, eml);
@@ -36,7 +36,13 @@ public class SignInModel implements Model {
                 if (pass.equals(ps)) {
                     int st = rs.getInt("status");
                     if (st == 1) {
-                        req.getSession(true);
+                        String nameQuery = "SELECT b.buyer_name FROM buyer_table b INNER JOIN ecomm_login a ON (a.uid=b.buyer_uid) WHERE (a.uid=?);";
+                        pstm = dao.con.prepareStatement(nameQuery);
+                        pstm.setInt(1, rs.getInt("uid"));
+                        rs = dao.toFetch(pstm);
+                        rs.next();
+                        HttpSession sess = req.getSession(true);
+                        sess.setAttribute("name", rs.getString("buyer_name"));
                         req.getRequestDispatcher("buyer").forward(req, res);
                     } else {
                         int id = rs.getInt("uid");

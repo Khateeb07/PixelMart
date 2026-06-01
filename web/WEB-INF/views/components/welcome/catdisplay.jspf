@@ -1,0 +1,196 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+
+<div class="container my-5">
+
+    <div class="text-center mb-5">
+
+        <h2 class="fw-bold display-6">
+            Featured Categories
+        </h2>
+
+        <p class="text-muted">
+            Discover products across our most popular categories
+        </p>
+
+    </div>
+
+    <div class="row g-4">
+
+        <!-- Electronics -->
+
+        <div class="col-lg-4 col-md-6">
+
+            <a href="prodsubcat?catid=1"
+               class="text-decoration-none">
+
+                <div class="category-card">
+
+                    <img
+                        src="${pageContext.request.contextPath}/images/catdisplay/catimg1.png"
+                        alt="Electronics">
+
+                    <div class="category-overlay">
+
+                        <h3>Electronics</h3>
+
+                        <p>
+                            Smartphones • Laptops • Tablets
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+        <!-- Fashion -->
+
+        <div class="col-lg-4 col-md-6">
+
+            <a href="prodsubcat?catid=2"
+               class="text-decoration-none">
+
+                <div class="category-card">
+
+                    <img
+                        src="${pageContext.request.contextPath}/images/catdisplay/catimg2.png"
+                        alt="Fashion">
+
+                    <div class="category-overlay">
+
+                        <h3>Fashion</h3>
+
+                        <p>
+                            Clothing • Shoes • Accessories
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+        <!-- Home & Kitchen -->
+
+        <div class="col-lg-4 col-md-6">
+
+            <a href="prodsubcat?catid=3"
+               class="text-decoration-none">
+
+                <div class="category-card">
+
+                    <img
+                        src="${pageContext.request.contextPath}/images/catdisplay/catimg3.png"
+                        alt="Home & Kitchen">
+
+                    <div class="category-overlay">
+
+                        <h3>Home & Kitchen</h3>
+
+                        <p>
+                            Furniture • Decor • Kitchenware
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+        <!-- Beauty & Personal Care -->
+
+        <div class="col-lg-4 col-md-6">
+
+            <a href="prodsubcat?catid=5"
+               class="text-decoration-none">
+
+                <div class="category-card">
+
+                    <img
+                        src="${pageContext.request.contextPath}/images/catdisplay/catimg5.png"
+                        alt="Beauty & Personal Care">
+
+                    <div class="category-overlay">
+
+                        <h3>Beauty & Personal Care</h3>
+
+                        <p>
+                            Makeup • Skincare • Fragrances
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+        <!-- Sports -->
+
+        <div class="col-lg-4 col-md-6">
+
+            <a href="prodsubcat?catid=6"
+               class="text-decoration-none">
+
+                <div class="category-card">
+
+                    <img
+                        src="${pageContext.request.contextPath}/images/catdisplay/catimg6.png"
+                        alt="Sports">
+
+                    <div class="category-overlay">
+
+                        <h3>Sports</h3>
+
+                        <p>
+                            Fitness • Training • Accessories
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+        <!-- Automotive -->
+
+        <div class="col-lg-4 col-md-6">
+
+            <a href="prodsubcat?catid=8"
+               class="text-decoration-none">
+
+                <div class="category-card">
+
+                    <img
+                        src="${pageContext.request.contextPath}/images/catdisplay/catimg8.png"
+                        alt="Automotive">
+
+                    <div class="category-overlay">
+
+                        <h3>Automotive</h3>
+
+                        <p>
+                            Vehicles • Parts • Accessories
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

@@ -10,7 +10,7 @@ import jakarta.mail.internet.*;
 
 /**
  *
- * @author zed
+ * @author khateeb
  */
 public class MailSender {
 

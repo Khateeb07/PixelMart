@@ -1,0 +1,94 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+
+<div class="container my-5">
+
+    <div class="text-center mb-5">
+
+        <h2 class="fw-bold">
+            Why Choose PixelMart?
+        </h2>
+
+        <p class="text-muted">
+            Designed to deliver a modern, reliable and enjoyable shopping experience.
+        </p>
+
+    </div>
+
+    <div class="row g-4">
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="card border-0 shadow-sm h-100 text-center p-4 why-card">
+
+                <i class="bi bi-lightning-charge-fill text-warning display-4"></i>
+
+                <h5 class="mt-3 fw-bold">
+                    Fast Experience
+                </h5>
+
+                <p class="text-muted mb-0">
+                    Quick product discovery and seamless browsing.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="card border-0 shadow-sm h-100 text-center p-4 why-card">
+
+                <i class="bi bi-shield-lock-fill text-success display-4"></i>
+
+                <h5 class="mt-3 fw-bold">
+                    Secure Platform
+                </h5>
+
+                <p class="text-muted mb-0">
+                    Built with reliability and user security in mind.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="card border-0 shadow-sm h-100 text-center p-4 why-card">
+
+                <i class="bi bi-grid-3x3-gap-fill text-primary display-4"></i>
+
+                <h5 class="mt-3 fw-bold">
+                    Wide Selection
+                </h5>
+
+                <p class="text-muted mb-0">
+                    Products across multiple categories and interests.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="card border-0 shadow-sm h-100 text-center p-4 why-card">
+
+                <i class="bi bi-stars text-danger display-4"></i>
+
+                <h5 class="mt-3 fw-bold">
+                    Quality First
+                </h5>
+
+                <p class="text-muted mb-0">
+                    Carefully organized products for a better shopping experience.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,12 +1,12 @@
 <%-- 
     Document   : index
     Created on : Dec 16, 2025, 2:25:03 PM
-    Author     : zed
+    Author     : khateeb
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8" session="false"%>
 <%
-    HttpSession sess = request.getSession();
+    HttpSession sess = request.getSession(false);
     if (sess != null) {
         sess.invalidate();
     }
@@ -15,12 +15,15 @@
 <html>
     <head>
         <title>Pixel Mart App</title>
+        <link rel="icon"
+              type="image/x-icon"
+              href="${pageContext.request.contextPath}/images/logos/favicon.png">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     </head>
-    <body class="bg-light" onload="navbtn('index'); sinform('sform');" id="index">
+    <body class="bg-light" onload="navbtn('index'); signform('sform');" id="index">
         
         <!-- Navigation Bar-->
         <%@include file="WEB-INF/views/components/navbar.jspf" %>
@@ -29,6 +32,7 @@
         <%@include file="WEB-INF/views/components/buyersignup.jspf" %>
         <!-- End of Sign Up Modal -->
 
+        <!--Sign In Form-->
         <div class="container my-5">
             <div class="row justify-content-center">
                 <div class="col-md-4">

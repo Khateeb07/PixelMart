@@ -17,7 +17,7 @@ import org.json.simple.JSONArray;
 
 /**
  *
- * @author zed
+ * @author khateeb
  */
 public class EmailCheckerModel implements Model {
 
@@ -26,8 +26,7 @@ public class EmailCheckerModel implements Model {
         try (PrintWriter out = res.getWriter()) {
             String email = req.getParameter("email");
             MyDAO dao = new MyDAO();
-            String driver = "com.mysql.cj.jdbc.Driver";
-            dao.toConnect(driver);
+            dao.toConnect();
             String query = "SELECT email FROM ecomm_login WHERE(email=?);";
             PreparedStatement pstm = dao.con.prepareStatement(query);
             pstm.setString(1, email);

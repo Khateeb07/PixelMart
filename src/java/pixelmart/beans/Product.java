@@ -6,7 +6,7 @@ package pixelmart.beans;
 
 /**
  *
- * @author zed
+ * @author khateeb
  */
 public class Product {
 

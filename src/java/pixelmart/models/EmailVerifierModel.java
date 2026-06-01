@@ -12,7 +12,7 @@ import java.sql.PreparedStatement;
 
 /**
  *
- * @author zed
+ * @author khateeb
  */
 public class EmailVerifierModel implements Model {
 
@@ -21,8 +21,7 @@ public class EmailVerifierModel implements Model {
         try {
             String uid = req.getParameter("uid");
             MyDAO dao = new MyDAO();
-            String driver = "com.mysql.cj.jdbc.Driver";
-            dao.toConnect(driver);
+            dao.toConnect();
             String query = "UPDATE ecomm_login SET status=1 WHERE (uid=?);";
             PreparedStatement pstm = dao.con.prepareStatement(query);
             pstm.setString(1, uid);

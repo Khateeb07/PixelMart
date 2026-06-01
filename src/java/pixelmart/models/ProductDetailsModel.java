@@ -12,20 +12,22 @@ import java.io.IOException;
 
 /**
  *
- * @author zed
+ * @author khateeb
  */
 public class ProductDetailsModel implements Model {
 
     public void businessLogic(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        int pid = Integer.parseInt(req.getParameter("id"));
+        MyDAO dao = new MyDAO();
         try {
-            int pid = Integer.parseInt(req.getParameter("pid"));
-            MyDAO dao = new MyDAO();
+            dao.toConnect();
             Product product = dao.getProductById(pid);
+            String img = dao.encodeImageToBase64(product.getProductImagePath());
             req.setAttribute("product", product);
-            req.getRequestDispatcher("").forward(req, res);
-            
+            req.setAttribute("imageData", img);
+            req.getRequestDispatcher("proddisp").forward(req, res);
         } catch (Exception e) {
-            
+            e.printStackTrace();
         }
     }
 }

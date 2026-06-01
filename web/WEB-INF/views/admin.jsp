@@ -1,7 +1,7 @@
 <%-- 
     Document   : admin
     Created on : Dec 18, 2025, 11:37:14 PM
-    Author     : zed
+    Author     : khateeb
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8" session="false"%>
@@ -17,7 +17,10 @@
     <head>
         <meta charset="UTF-8">
         <title>Admin Page</title>
-
+        <link rel="icon"
+              type="image/x-icon"
+              href="${pageContext.request.contextPath}/images/logos/favicon.png">
+        
         <!-- Bootstrap CSS -->
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">

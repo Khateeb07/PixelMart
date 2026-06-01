@@ -16,7 +16,7 @@ import org.json.simple.JSONObject;
 
 /**
  *
- * @author zed
+ * @author khateeb
  */
 public class ProductSubcategoryModel implements Model {
 
@@ -24,9 +24,8 @@ public class ProductSubcategoryModel implements Model {
     public void businessLogic(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         try (PrintWriter out = res.getWriter()) {
             String cid = req.getParameter("catid");
-            String driver = "com.mysql.cj.jdbc.Driver";
             MyDAO dao = new MyDAO();
-            dao.toConnect(driver);
+            dao.toConnect();
             String query = "SELECT * FROM subcategory_table WHERE(product_category_id=?)";
             PreparedStatement pstm = dao.con.prepareStatement(query);
             pstm.setString(1, cid);

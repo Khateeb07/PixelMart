@@ -11,7 +11,7 @@ import java.io.IOException;
  */
 /**
  *
- * @author zed
+ * @author khateeb
  */
 public interface Model {
 

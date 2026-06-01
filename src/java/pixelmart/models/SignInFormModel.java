@@ -14,7 +14,7 @@ import org.json.simple.JSONObject;
  */
 /**
  *
- * @author zed
+ * @author khateeb
  */
 public class SignInFormModel implements Model {
 

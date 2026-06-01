@@ -18,7 +18,7 @@ import java.sql.*;
 
 /**
  *
- * @author zed
+ * @author khateeb
  */
 public class ProductUploadModel implements Model {
 
@@ -46,10 +46,9 @@ public class ProductUploadModel implements Model {
         System.out.println(pwt);
         System.out.println(pdesc);
 
-        String driver = "com.mysql.cj.jdbc.Driver";
         try (PrintWriter out = res.getWriter()) {
             MyDAO dao = new MyDAO();
-            dao.toConnect(driver);
+            dao.toConnect();
 
             // Fetching product id
             String query = "SELECT product_id FROM product_table ORDER BY product_id DESC LIMIT 1";

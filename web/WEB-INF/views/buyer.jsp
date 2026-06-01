@@ -1,15 +1,19 @@
 <%-- 
     Document   : buyer
     Created on : Dec 18, 2025, 11:39:17 PM
-    Author     : zed
+    Author     : khateeb
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8" session="false"%>
 <%
     HttpSession sess = request.getSession(false);
+    String name = "";
     if (sess == null) {
         response.sendRedirect("index");
         return;
+    } else {
+        name = sess.getAttribute("name").toString();
+        name = name.substring(0, name.indexOf(" "));
     }
 %>
 <!DOCTYPE html>
@@ -17,6 +21,9 @@
     <head>
         <meta charset="UTF-8">
         <title>Buyer Page</title>
+        <link rel="icon"
+              type="image/x-icon"
+              href="${pageContext.request.contextPath}/images/logos/favicon.png">
 
         <!-- Bootstrap CSS -->
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
@@ -35,7 +42,9 @@
 
                     <div class="card shadow-sm">
                         <div class="card-body text-center">
-                            <h2 class="mb-3">Welcome, Buyer 👋</h2>
+                            <%
+                                out.println("<h2 class=\"mb-3\">Welcome, " + name + "</h2>");
+                            %>
                             <p class="text-muted">
                                 You have successfully logged in.
                             </p>

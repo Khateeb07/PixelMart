@@ -21,19 +21,54 @@ import java.util.Base64;
 
 /**
  *
- * @author zed
+ * @author khateeb
  */
 public class ProductLoadModel implements Model {
 
     @Override
     public void businessLogic(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        String driver = "com.mysql.cj.jdbc.Driver";
         MyDAO dao = new MyDAO();
+        String type = req.getParameter("type");
+        String query = "";
+        PreparedStatement pstm = null;
         try (PrintWriter out = res.getWriter()) {
-            dao.toConnect(driver);
-            String query = "SELECT product_id FROM product_table WHERE(product_subcategory_id=?);";
-            PreparedStatement pstm = dao.con.prepareStatement(query);
-            pstm.setInt(1, 101);
+            dao.toConnect();
+            if (type.equals("trends")) {
+                query = "SELECT p.* "
+                        + "FROM product_table p "
+                        + "INNER JOIN subcategory_table s "
+                        + "ON p.product_subcategory_id = s.product_subcategory_id "
+                        + "WHERE s.product_category_id IN (?,?,?,?,?,?) "
+                        + "ORDER BY RAND() "
+                        + "LIMIT 12";
+                pstm = dao.con.prepareStatement(query);
+                pstm.setInt(1, 1);
+                pstm.setInt(2, 2);
+                pstm.setInt(3, 3);
+                pstm.setInt(4, 5);
+                pstm.setInt(5, 6);
+                pstm.setInt(6, 8);
+            } else if (type.equals("deals")) {
+                query = "SELECT * FROM product_table ORDER BY product_discount DESC LIMIT 12";
+                pstm = dao.con.prepareStatement(query);
+            } else if (type.equals("new")) {
+                query = "SELECT product_id "
+                        + "FROM ("
+                        + "   SELECT p.product_id, "
+                        + "          s.product_category_id, "
+                        + "          ROW_NUMBER() OVER ("
+                        + "              PARTITION BY s.product_category_id "
+                        + "              ORDER BY p.product_id DESC"
+                        + "          ) AS rn "
+                        + "   FROM product_table p "
+                        + "   INNER JOIN subcategory_table s "
+                        + "   ON p.product_subcategory_id = s.product_subcategory_id "
+                        + "   WHERE s.product_category_id IN (1,2,3,5,6,8)"
+                        + ") t "
+                        + "WHERE rn <= 2 "
+                        + "ORDER BY product_id DESC";
+                pstm = dao.con.prepareStatement(query);
+            }
             ResultSet rs = dao.toFetch(pstm);
             JSONArray jsonarr = new JSONArray();
             while (rs.next()) {
@@ -41,9 +76,9 @@ public class ProductLoadModel implements Model {
                 JSONObject jsonobj = new JSONObject();
                 jsonobj.put("product_name", product.getProductName());
                 jsonobj.put("product_brand", product.getProductBrand());
-                jsonobj.put("product_price", product.getProductPrice());
-                jsonobj.put("product_description", product.getProductDescription());
-                jsonobj.put("product_image_data", encodeImageToBase64(product.getProductImagePath()));
+                jsonobj.put("product_selling_price", product.getProductSellingPrice());
+                jsonobj.put("product_discount", product.getProductDiscount());
+                jsonobj.put("product_image_data", dao.encodeImageToBase64(product.getProductImagePath()));
                 jsonobj.put("product_id", product.getProductId());
                 jsonarr.add(jsonobj);
             }
@@ -52,11 +87,5 @@ public class ProductLoadModel implements Model {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public String encodeImageToBase64(String imagePath) throws Exception {
-        File file = new File(imagePath);
-        byte[] fileContent = Files.readAllBytes(file.toPath());
-        return Base64.getEncoder().encodeToString(fileContent);
     }
 }

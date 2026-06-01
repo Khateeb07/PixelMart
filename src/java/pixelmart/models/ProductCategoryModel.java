@@ -16,17 +16,15 @@ import org.json.simple.JSONObject;
 
 /**
  *
- * @author zed
+ * @author khateeb
  */
 public class ProductCategoryModel implements Model {
 
     @Override
     public void businessLogic(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         try (PrintWriter out = res.getWriter()) {
-
-            String driver = "com.mysql.cj.jdbc.Driver";
             MyDAO dao = new MyDAO();
-            dao.toConnect(driver);
+            dao.toConnect();
             String query = "SELECT product_category_id, product_category_name FROM category_table";
             PreparedStatement pstm = dao.con.prepareStatement(query);
             ResultSet rs = dao.toFetch(pstm);

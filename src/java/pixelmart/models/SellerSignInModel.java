@@ -12,7 +12,7 @@ import java.sql.*;
 
 /**
  *
- * @author zed
+ * @author khateeb
  */
 public class SellerSignInModel implements Model {
     
@@ -21,9 +21,9 @@ public class SellerSignInModel implements Model {
         try {
             String em=req.getParameter("emailin");
             String pass=req.getParameter("passin");
-            String driver="com.mysql.cj.jdbc.Driver";
+            
             MyDAO dao=new MyDAO();
-            dao.toConnect(driver);
+            dao.toConnect();
             String query="SELECT seller_password FROM seller_table WHERE(seller_email=?)";
             PreparedStatement pstm=dao.con.prepareStatement(query);
             pstm.setString(1, em);

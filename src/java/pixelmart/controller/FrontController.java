@@ -18,7 +18,7 @@ import pixelmart.models.Model;
 
 /**
  *
- * @author zed
+ * @author khateeb
  */
 @MultipartConfig
 public class FrontController extends HttpServlet {
@@ -41,7 +41,7 @@ public class FrontController extends HttpServlet {
                 request.getRequestDispatcher("welcome").forward(request, response);
             }
             Properties props = new Properties();
-            props.load(new FileInputStream("/home/zed/NetBeansProjects/pixelmart/src/java/pixelmart/controller/info.properties"));
+            props.load(FrontController.class.getResourceAsStream("info.properties"));
             String pathValue = props.getProperty(path);
             if (pathValue != null) {
                 if (pathValue.substring(pathValue.length() - 3).equals("jsp")) {

@@ -35,7 +35,7 @@ let asynData = function (id, embox, sgbtn) {
     xhr.open("GET", url, true);
     xhr.send(null);
 };
-let sinform = function (fdiv) {
+let signform = function (fdiv) {
     let formdiv = document.getElementById(fdiv);
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
@@ -148,64 +148,144 @@ let loadSubcategories = function (catid, subcategory) {
     xhr.open("GET", url, true);
     xhr.send(null);
 };
-let loadProducts = function () {
+
+//Product Cards on Welcome
+let loadProducts = function (type, target) {
+
     let xhr = new XMLHttpRequest();
+
     xhr.onreadystatechange = function () {
+
         if (xhr.readyState === 4) {
+
             if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
+
                 let jarr = JSON.parse(xhr.responseText);
+
                 let cards = jarr.map((obj, index) =>
                     React.createElement(
-                            "div", {
-                                className: "card m-1 shadow-sm",
-                                style: {width: "18rem"},
+                            "div",
+                            {
+                                className: "col-lg-3 col-md-4 col-sm-6 mb-4",
                                 key: index
                             },
                             React.createElement(
-                                    "a", {
-                                        className: "text-decoration-none text-dark",
-                                        href: `proddisp?id=${obj.product_id}`
+                                    "a",
+                                    {
+                                        href: `proddtls?id=${obj.product_id}`,
+                                        className: "text-decoration-none text-dark"
                                     },
                                     React.createElement(
                                             "div",
                                             {
-                                                style: {
-                                                    height: "16rem"
-                                                            //overflow: "hidden"
-                                                },
-                                                className: "d-flex align-items-center justify-content-center p-2"
+                                                className: "card trending-card h-100 border-0"
                                             },
+                                            // Product Image
                                             React.createElement(
-                                                    "img",
+                                                    "div",
                                                     {
-                                                        src: `data:image/${obj.type};base64,${obj.product_image_data}`,
-                                                        alt: `${obj.product_name}`,
-                                                        style: {
-                                                            maxWidth: "100%",
-                                                            maxHeight: "15rem",
-                                                            objectFit: "contain"
-                                                        }
-                                                    })
-                                            ),
-                                    React.createElement(
-                                            "div", {
-                                                className: "card-body"
-                                            },
-                                            React.createElement("h5", {className: "card-title"}, obj.product_name),
-                                            React.createElement("h6", {className: "card-text"}, obj.product_brand),
-                                            React.createElement("h6", {className: "card-text"}, /*"₹"*/"$" + obj.product_price),
-                                            React.createElement("p", {className: "card-text"}, obj.product_description.substring(0, 60) + "...")
+                                                        className:
+                                                                "d-flex justify-content-center align-items-center"
+                                                    },
+                                                    React.createElement(
+                                                            "img",
+                                                            {
+                                                                src:
+                                                                        `data:image/${obj.type};base64,${obj.product_image_data}`,
+                                                                alt:
+                                                                        obj.product_name,
+                                                                className:
+                                                                        "trending-img"
+                                                            }
+                                                    )
+                                                    ),
+                                            // Product Body
+                                            React.createElement(
+                                                    "div",
+                                                    {
+                                                        className: "card-body"
+                                                    },
+                                                    React.createElement(
+                                                            "h6",
+                                                            {
+                                                                className:
+                                                                        "fw-bold mb-1"
+                                                            },
+                                                            obj.product_name
+                                                            ),
+                                                    React.createElement(
+                                                            "small",
+                                                            {
+                                                                className:
+                                                                        "text-muted"
+                                                            },
+                                                            obj.product_brand
+                                                            ),
+                                                    React.createElement(
+                                                            "div",
+                                                            {
+                                                                className:
+                                                                        "mt-2 text-warning"
+                                                            },
+                                                            "⭐⭐⭐⭐"
+                                                            ),
+                                                    React.createElement(
+                                                            "div",
+                                                            {
+                                                                className:
+                                                                        "mt-2"
+                                                            },
+                                                            React.createElement(
+                                                                    "span",
+                                                                    {
+                                                                        className:
+                                                                                "discount-badge"
+                                                                    },
+                                                                    `${obj.product_discount}% OFF`
+                                                                    )
+                                                            ),
+                                                    React.createElement(
+                                                            "h5",
+                                                            {
+                                                                className:
+                                                                        "fw-bold mt-3 mb-0 text-success"
+                                                            },
+                                                            "$" + obj.product_selling_price
+                                                            )
+                                                    )
                                             )
                                     )
                             )
                 );
-                let container = React.createElement("div", {className: "d-flex flex-wrap justify-content-center"}, cards);
-                ReactDOM.render(container, document.getElementById("products"));
+
+                let container = React.createElement(
+                        "div",
+                        {
+                            className: "container"
+                        },
+                        React.createElement(
+                                "div",
+                                {
+                                    className: "row"
+                                },
+                                cards
+                                )
+                        );
+
+                ReactDOM.render(
+                        container,
+                        document.getElementById(target)
+                        );
             }
         }
     };
-    let url = "http://localhost:8080/pixelmart/fc/prodld";
-    xhr.open("GET", url, true);
+
+    xhr.open(
+            "GET",
+            "http://localhost:8080/pixelmart/fc/prodld?type=" + type,
+            true
+            );
+
     xhr.send(null);
 };
 function navbtn() {

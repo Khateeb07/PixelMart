@@ -1,7 +1,7 @@
 <%-- 
     Document   : registered
     Created on : Dec 18, 2025, 2:55:52 PM
-    Author     : zed
+    Author     : khateeb
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8" session="false"%>
@@ -12,6 +12,9 @@
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
         <title>Registration Successful</title>
+        <link rel="icon"
+              type="image/x-icon"
+              href="${pageContext.request.contextPath}/images/logos/favicon.png">
     </head>
     <body class="bg-light">       
         <!-- Navigation Bar-->
