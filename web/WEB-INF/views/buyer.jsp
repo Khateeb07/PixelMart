@@ -75,6 +75,8 @@
                 </div>
             </div>
         </div>
+                            
+        <%@include file="components/footer.jspf" %>
 
         <!-- Bootstrap JS -->
         <script src="https://unpkg.com/react@16/umd/react.development.js"></script>

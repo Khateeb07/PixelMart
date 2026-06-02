@@ -29,46 +29,53 @@ public class ProductLoadModel implements Model {
     public void businessLogic(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         MyDAO dao = new MyDAO();
         String type = req.getParameter("type");
-        String query = "";
+        String query;
         PreparedStatement pstm = null;
         try (PrintWriter out = res.getWriter()) {
             dao.toConnect();
-            if (type.equals("trends")) {
-                query = "SELECT p.* "
-                        + "FROM product_table p "
-                        + "INNER JOIN subcategory_table s "
-                        + "ON p.product_subcategory_id = s.product_subcategory_id "
-                        + "WHERE s.product_category_id IN (?,?,?,?,?,?) "
-                        + "ORDER BY RAND() "
-                        + "LIMIT 12";
-                pstm = dao.con.prepareStatement(query);
-                pstm.setInt(1, 1);
-                pstm.setInt(2, 2);
-                pstm.setInt(3, 3);
-                pstm.setInt(4, 5);
-                pstm.setInt(5, 6);
-                pstm.setInt(6, 8);
-            } else if (type.equals("deals")) {
-                query = "SELECT * FROM product_table ORDER BY product_discount DESC LIMIT 12";
-                pstm = dao.con.prepareStatement(query);
-            } else if (type.equals("new")) {
-                query = "SELECT product_id "
-                        + "FROM ("
-                        + "   SELECT p.product_id, "
-                        + "          s.product_category_id, "
-                        + "          ROW_NUMBER() OVER ("
-                        + "              PARTITION BY s.product_category_id "
-                        + "              ORDER BY p.product_id DESC"
-                        + "          ) AS rn "
-                        + "   FROM product_table p "
-                        + "   INNER JOIN subcategory_table s "
-                        + "   ON p.product_subcategory_id = s.product_subcategory_id "
-                        + "   WHERE s.product_category_id IN (1,2,3,5,6,8)"
-                        + ") t "
-                        + "WHERE rn <= 2 "
-                        + "ORDER BY product_id DESC";
-                pstm = dao.con.prepareStatement(query);
-            }
+            switch (type) {
+                case "trends": {
+                    query = "SELECT p.* "
+                            + "FROM product_table p "
+                            + "INNER JOIN subcategory_table s "
+                            + "ON p.product_subcategory_id = s.product_subcategory_id "
+                            + "WHERE s.product_category_id IN (?,?,?,?,?,?) "
+                            + "ORDER BY RAND() "
+                            + "LIMIT 12";
+                    pstm = dao.con.prepareStatement(query);
+                    pstm.setInt(1, 1);
+                    pstm.setInt(2, 2);
+                    pstm.setInt(3, 3);
+                    pstm.setInt(4, 5);
+                    pstm.setInt(5, 6);
+                    pstm.setInt(6, 8);
+                    break;
+                }
+                case "deals": {
+                    query = "SELECT * FROM product_table ORDER BY product_discount DESC LIMIT 12";
+                    pstm = dao.con.prepareStatement(query);
+                    break;
+                }
+                case "new": {
+                    query = "SELECT product_id "
+                            + "FROM ("
+                            + "   SELECT p.product_id, "
+                            + "          s.product_category_id, "
+                            + "          ROW_NUMBER() OVER ("
+                            + "              PARTITION BY s.product_category_id "
+                            + "              ORDER BY p.product_id DESC"
+                            + "          ) AS rn "
+                            + "   FROM product_table p "
+                            + "   INNER JOIN subcategory_table s "
+                            + "   ON p.product_subcategory_id = s.product_subcategory_id "
+                            + "   WHERE s.product_category_id IN (1,2,3,5,6,8)"
+                            + ") t "
+                            + "WHERE rn <= 2 "
+                            + "ORDER BY product_id DESC";
+                    pstm = dao.con.prepareStatement(query);
+                }
+            } //Switch Ends
+            
             ResultSet rs = dao.toFetch(pstm);
             JSONArray jsonarr = new JSONArray();
             while (rs.next()) {

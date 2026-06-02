@@ -13,17 +13,19 @@
         <link rel="icon"
               type="image/x-icon"
               href="${pageContext.request.contextPath}/images/logos/favicon.png">
-        
+
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     </head>
     <body class="bg-light" onload="loadProducts();" id="prdldpg">
-        
+
         <!-- Navigation Bar -->
         <%@include file="components/navbar.jspf" %>
-        
+
         <div id="products"></div>
-        
+
+        <%@include file="components/footer.jspf" %>
+
         <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
         <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
         <script src="${pageContext.request.contextPath}/js/indexpage.js" type="text/javascript"></script>

@@ -1,0 +1,23 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Jun 2, 2026, 8:55:33 PM
+    Author     : khateeb
+*/
+
+.bg-blue {
+    background-color: #6594B1;
+    color: black;
+}
+
+/* Footer Social Icon */
+.social-icon{
+    transition: all .3s ease;
+}
+
+.social-icon:hover{
+    color:#6594B1 !important;
+    transform: translateY(-3px);
+}

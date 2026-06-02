@@ -20,7 +20,7 @@
         <link rel="icon"
               type="image/x-icon"
               href="${pageContext.request.contextPath}/images/logos/favicon.png">
-        
+
         <!-- Bootstrap CSS -->
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
@@ -94,7 +94,9 @@
                 </div>
             </div>
         </div>
-
+        
+        <%@include file="components/footer.jspf" %>
+        
         <!-- JS Files -->
         <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
         <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>

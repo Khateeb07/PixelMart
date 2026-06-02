@@ -13,20 +13,20 @@
         <link rel="icon"
               type="image/x-icon"
               href="${pageContext.request.contextPath}/images/logos/favicon.png">
-        
+
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/css/welcome.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     </head>
     <body class="bg-light" onload="loadProducts('trends', 'trending'); loadProducts('deals', 'bestDeals'); loadProducts('new', 'latest'); loadCategories('category');" id="welcome">
 
         <header>
-            <div id="banner">
-                <%@include file="components/welcome/banner.jspf"%>
-            </div>
-            <div id="navbar">
-                <%@include file="components/welcome/navbar.jspf"%>
-            </div>
+
+            <%@include file="components/welcome/banner.jspf"%>
+
+            <%@include file="components/welcome/wnav.jspf"%>
+
         </header>
         <main>
             <!--Hero Carousel-->
@@ -80,58 +80,20 @@
             </div>
 
             <!-- Category Display Section -->
-            <%@include file="components/welcome/catdisplay.jspf"%>
+            <%@include file="components/welcome/catcards.jspf"%>
 
             <!-- Category Pills Section -->
             <%@include file="components/welcome/catpills.jspf"%>
 
             <!<!-- Catalogs Section -->
             <%@include file="components/welcome/catalogs.jspf"%>
-            
+
             <!<!-- Why Us Section -->
             <%@include file="components/welcome/whyus.jspf"%>
 
         </main>
-        <footer class="bg-dark text-light mt-5">
-
-            <div class="container py-5">
-
-                <div class="row">
-
-                    <div class="col-md-4">
-                        <h4>Pixel Mart</h4>
-                        <p class="text-secondary">
-                            Your one-stop destination for modern online shopping.
-                        </p>
-                    </div>
-
-                    <div class="col-md-4">
-                        <h5>Quick Links</h5>
-                        <ul class="list-unstyled">
-                            <li>About Us</li>
-                            <li>Contact</li>
-                            <li>Privacy Policy</li>
-                        </ul>
-                    </div>
-
-                    <div class="col-md-4">
-                        <h5>Follow Us</h5>
-                        <a href="https://github.com/khateeb07" target="_blank" class="text-light me-3 social-icon"><i class="bi bi-github fs-4"></i></a>
-                        <a href="https://linkedin.com/in/khateeb07" target="_blank" class="text-light me-3 social-icon"><i class="bi bi-linkedin fs-4"></i></a>
-                        <i class="bi bi-twitter-x fs-4 social-icon"></i>
-                    </div>
-
-                </div>
-
-                <hr>
-
-                <p class="text-center mb-0">
-                    © 2026 Pixel Mart. All Rights Reserved.
-                </p>
-
-            </div>
-
-        </footer>
+            
+        <%@include file="components/footer.jspf" %>
 
         <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
         <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>

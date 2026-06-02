@@ -1,0 +1,42 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<footer class="bg-dark text-light mt-5">
+
+    <div class="container py-5">
+
+        <div class="row">
+
+            <div class="col-md-4">
+                <h4>Pixel Mart</h4>
+                <p class="text-secondary">
+                    Your one-stop destination for modern online shopping.
+                </p>
+            </div>
+
+            <div class="col-md-4">
+                <h5>Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li>About Us</li>
+                    <li>Contact</li>
+                    <li>Privacy Policy</li>
+                </ul>
+            </div>
+
+            <div class="col-md-4">
+                <h5>Follow Us</h5>
+                <a href="https://github.com/khateeb07" target="_blank" class="text-light me-3 social-icon"><i class="bi bi-github fs-4"></i></a>
+                <a href="https://linkedin.com/in/khateeb07" target="_blank" class="text-light me-3 social-icon"><i class="bi bi-linkedin fs-4"></i></a>
+                <i class="bi bi-twitter-x fs-4 social-icon"></i>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <p class="text-center mb-0">
+            © 2026 Pixel Mart. All Rights Reserved.
+        </p>
+
+    </div>
+
+</footer>

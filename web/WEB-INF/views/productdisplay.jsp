@@ -271,6 +271,8 @@
 
         </div>
 
+        <%@include file="components/footer.jspf" %>
+
         <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
         <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
         <script src="${pageContext.request.contextPath}/js/indexpage.js"></script>

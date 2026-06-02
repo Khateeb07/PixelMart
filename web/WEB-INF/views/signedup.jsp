@@ -19,7 +19,7 @@
     <body class="bg-light">       
         <!-- Navigation Bar-->
         <%@include file="components/navbar.jspf" %>
-        
+
         <div class="d-flex justify-content-center align-items-center">
             <div class="card shadow text-center p-4" style="max-width: 420px;">
                 <div class="card-body">
@@ -35,6 +35,9 @@
                 </div>
             </div>
         </div>
+
+        <%@include file="components/footer.jspf" %>
+
         <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
         <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
         <script src="${pageContext.request.contextPath}/js/indexpage.js" type="text/javascript"></script>

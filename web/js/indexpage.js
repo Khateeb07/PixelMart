@@ -108,7 +108,7 @@ let loadCategories = function (category) {
             }
         }
     };
-    let url = "http://localhost:8080/pixelmart/fc/prodcat";
+    let url = "http://localhost:8080/pixelmart/fc/prodcat?type=json";
     xhr.open("GET", url, true);
     xhr.send(null);
 };
@@ -144,7 +144,7 @@ let loadSubcategories = function (catid, subcategory) {
             }
         }
     };
-    let url = "http://localhost:8080/pixelmart/fc/prodsubcat?catid=" + catid;
+    let url = `http://localhost:8080/pixelmart/fc/prodsubcat?catid=${catid}&type=json`;
     xhr.open("GET", url, true);
     xhr.send(null);
 };
@@ -305,7 +305,7 @@ function navbtn() {
                 // Cart Button
                 React.createElement(
                         "button", {
-                            className: "btn btn-light shadow-none m-2",
+                            className: "btn btn-outline-light rounded-pill px-3 m-1",
                             type: "button"
                         }, React.createElement(
                         "i", {
@@ -317,7 +317,7 @@ function navbtn() {
                 React.createElement(
                         "a", {
                             href: "index",
-                            className: "btn btn-light shadow-none m-2"
+                            className: "btn btn-outline-light rounded-pill px-3 m-1"
                         },
                         React.createElement(
                                 "i", {
@@ -421,6 +421,121 @@ let productView = function (pid) {
     };
     let url = "http://localhost:8080/pixelmart/fc/proddtls?id=" + pid;
     xhr.open("GET", url, true);
+
+    xhr.send(null);
+};
+
+let showSubcategoryCards = function (catid) {
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function () {
+
+        if (xhr.readyState === 4) {
+
+            if ((xhr.status >= 200 && xhr.status < 300)
+                    || xhr.status === 304) {
+
+                let jarr =
+                        JSON.parse(xhr.responseText);
+
+                let cards =
+                        jarr.map((obj, index) =>
+                            React.createElement(
+                                    "div",
+                                    {
+                                        className:
+                                                "col-lg-4 col-md-6 mb-4",
+                                        key: index
+                                    },
+                                    React.createElement(
+                                            "a",
+                                            {
+                                                href:
+                                                        `prodld?subcatid=${obj.id}`,
+                                                className:
+                                                        "text-decoration-none"
+                                            },
+                                            React.createElement(
+                                                    "div",
+                                                    {
+                                                        className:
+                                                                "subcategory-card"
+                                                    },
+                                                    React.createElement(
+                                                            "div",
+                                                            {
+                                                                className:
+                                                                        "subcategory-title"
+                                                            },
+                                                            obj.name
+                                                            ),
+                                                    React.createElement(
+                                                            "div",
+                                                            {
+                                                                className:
+                                                                        "subcategory-desc"
+                                                            },
+                                                            "Browse products, explore collections and discover top brands."
+                                                            ),
+                                                    React.createElement(
+                                                            "div",
+                                                            {
+                                                                className:
+                                                                        "subcategory-footer"
+                                                            },
+                                                            React.createElement(
+                                                                    "span",
+                                                                    {
+                                                                        className:
+                                                                                "subcategory-link"
+                                                                    },
+                                                                    "Explore Collection"
+                                                                    ),
+                                                            React.createElement(
+                                                                    "div",
+                                                                    {
+                                                                        className:
+                                                                                "arrow-circle"
+                                                                    },
+                                                                    React.createElement(
+                                                                            "i",
+                                                                            {
+                                                                                className:
+                                                                                        "bi bi-arrow-right"
+                                                                            }
+                                                                    )
+                                                                    )
+                                                            )
+                                                    )
+                                            )
+                                    )
+                        );
+
+                let container =
+                        React.createElement(
+                                "div",
+                                {
+                                    className: "row"
+                                },
+                                cards
+                                );
+
+                ReactDOM.render(
+                        container,
+                        document.getElementById(
+                                "subcategoryContainer"
+                                )
+                        );
+            }
+        }
+    };
+
+    xhr.open(
+            "GET",
+            `http://localhost:8080/pixelmart/fc/prodsubcat?catid=${catid}&type=json`,
+            true
+            );
 
     xhr.send(null);
 };

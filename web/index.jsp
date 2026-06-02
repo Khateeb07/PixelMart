@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : index
     Created on : Dec 16, 2025, 2:25:03 PM
     Author     : khateeb
@@ -55,6 +55,9 @@
                 </div>
             </div>
         </div>
+        
+        <%@include file="WEB-INF/views/components/footer.jspf" %>
+        
         <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
         <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
         <script src="${pageContext.request.contextPath}/js/indexpage.js" type="text/javascript"></script>

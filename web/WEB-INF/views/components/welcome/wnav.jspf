@@ -1,0 +1,113 @@
+<%@ page pageEncoding="UTF-8" %>
+<div id="navbar">
+    <div id="header" class="shadow-sm py-2 sticky-top">
+
+        <div class="container-fluid">
+
+            <div class="row align-items-center">
+
+                <!-- Left Side -->
+
+                <div class="col-lg-10">
+
+                    <div class="row align-items-center">
+
+                        <!-- Logo -->
+
+                        <div class="col-lg-3 d-flex align-items-center text-light">
+
+                            <img
+                                src="${pageContext.request.contextPath}/images/logos/logo.png"
+                                width="70"
+                                height="70"
+                                class="ms-5 rounded"
+                                alt="logo">
+
+                            <a
+                                href="welcome"
+                                class="mb-0 h3 ms-3 text-light text-decoration-none logo-link">
+
+                                PixelMart
+
+                            </a>
+
+                        </div>
+
+                        <!-- Navigation -->
+
+                        <div
+                            class="col-lg-4 d-flex align-items-center justify-content-center">
+
+                            <select
+                                class="form-select bg-dark text-light border-0 shadow-none category-select me-4"
+                                id="category">
+
+                                <option value="" selected>
+                                    Category
+                                </option>
+
+                            </select>
+
+                            <a
+                                href="#best-deals"
+                                class="nav-link-custom me-4">
+
+                                Deals
+
+                            </a>
+
+                            <a
+                                href="#new-arrivals"
+                                class="nav-link-custom me-4">
+
+                                What's New
+
+                            </a>
+
+                            <a
+                                href="#why-us"
+                                class="nav-link-custom">
+
+                                Why Us
+
+                            </a>
+
+                        </div>
+
+                        <!-- Search -->
+
+                        <div class="col-lg-5">
+
+                            <div class="search-wrapper">
+
+                                <input
+                                    type="text"
+                                    class="search-input"
+                                    placeholder="Search products...">
+
+                                <i
+                                    class="bi bi-search search-icon">
+                                </i>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Right Side Buttons -->
+
+                <div
+                    class="col-lg-2 text-center"
+                    id="navbutton">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
