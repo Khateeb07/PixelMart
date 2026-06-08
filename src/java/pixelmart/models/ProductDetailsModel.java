@@ -4,11 +4,13 @@
  */
 package pixelmart.models;
 
-import pixelmart.beans.Product;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
+import pixelmart.beans.CategoryInfo;
+import pixelmart.beans.Product;
 
 /**
  *
@@ -17,15 +19,16 @@ import java.io.IOException;
 public class ProductDetailsModel implements Model {
 
     public void businessLogic(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        int pid = Integer.parseInt(req.getParameter("id"));
         MyDAO dao = new MyDAO();
-        try {
+        try (PrintWriter out = res.getWriter()) {
             dao.toConnect();
-            Product product = dao.getProductById(pid);
-            String img = dao.encodeImageToBase64(product.getProductImagePath());
+            Product product = dao.getProductById(Integer.parseInt(req.getParameter("pid")));
+            CategoryInfo cat = dao.getCategoryData(Integer.parseInt(req.getParameter("sid")));
             req.setAttribute("product", product);
-            req.setAttribute("imageData", img);
+            req.setAttribute("category", cat);
+            dao.toClose();
             req.getRequestDispatcher("proddisp").forward(req, res);
+            return;
         } catch (Exception e) {
             e.printStackTrace();
         }

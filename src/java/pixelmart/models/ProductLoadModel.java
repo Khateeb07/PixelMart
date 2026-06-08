@@ -14,11 +14,6 @@ import java.sql.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-// For image conversion to JSON
-import java.io.File;
-import java.nio.file.Files;
-import java.util.Base64;
-
 /**
  *
  * @author khateeb
@@ -73,9 +68,15 @@ public class ProductLoadModel implements Model {
                             + "WHERE rn <= 2 "
                             + "ORDER BY product_id DESC";
                     pstm = dao.con.prepareStatement(query);
+                    break;
+                }
+                default: {
+                    query = "SELECT product_id FROM product_table WHERE(product_subcategory_id = ?) LIMIT 12;";
+                    pstm = dao.con.prepareStatement(query);
+                    pstm.setInt(1, Integer.parseInt(type));
                 }
             } //Switch Ends
-            
+
             ResultSet rs = dao.toFetch(pstm);
             JSONArray jsonarr = new JSONArray();
             while (rs.next()) {
@@ -85,8 +86,9 @@ public class ProductLoadModel implements Model {
                 jsonobj.put("product_brand", product.getProductBrand());
                 jsonobj.put("product_selling_price", product.getProductSellingPrice());
                 jsonobj.put("product_discount", product.getProductDiscount());
-                jsonobj.put("product_image_data", dao.encodeImageToBase64(product.getProductImagePath()));
+                jsonobj.put("product_image_data", product.getProductImagePath());
                 jsonobj.put("product_id", product.getProductId());
+                jsonobj.put("product_subcategory_id", product.getProductSubcategoryId());
                 jsonarr.add(jsonobj);
             }
             dao.toClose();

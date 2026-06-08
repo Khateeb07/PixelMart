@@ -10,6 +10,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.util.Base64;
 import java.util.Properties;
+import pixelmart.beans.CategoryInfo;
 
 /**
  *
@@ -58,14 +59,14 @@ public class MyDAO {
             String selectProductQuery = "SELECT * FROM product_table WHERE (product_id=?)";
             PreparedStatement pstm = con.prepareStatement(selectProductQuery);
             pstm.setInt(1, pid);
-            ResultSet rs = pstm.executeQuery();
+            ResultSet rs = toFetch(pstm);
             if (rs.next()) {
                 prod = new Product();
                 prod.setProductId(pid);
                 prod.setProductName(rs.getString("product_name"));
                 prod.setProductSubcategoryId(rs.getInt("product_subcategory_id"));
                 prod.setProductPrice(rs.getDouble("product_price"));
-                prod.setProductImagePath(rs.getString("product_image_path"));
+                prod.setProductImagePath(encodeImageToBase64(rs.getString("product_image_path")));
                 prod.setProductDescription(rs.getString("product_description"));
                 prod.setProductBrand(rs.getString("product_brand"));
                 prod.setProductWarranty(rs.getString("product_warranty"));
@@ -79,6 +80,28 @@ public class MyDAO {
             e.printStackTrace();
         }
         return prod;
+    }
+    
+    public CategoryInfo getCategoryData(int id) {
+        CategoryInfo cat = null;
+        try {
+            String query = "SELECT sub.product_subcategory_id, sub.product_subcategory_name, cat.product_category_id,"
+                        + "cat.product_category_name FROM subcategory_table sub INNER JOIN category_table cat ON"
+                        + "(sub.product_category_id = cat.product_category_id) WHERE (sub.product_subcategory_id = ?);";
+            PreparedStatement pstm = con.prepareStatement(query);
+            pstm.setInt(1, id);
+            ResultSet rs = toFetch(pstm);
+            if(rs.next()) {
+                cat = new CategoryInfo();
+                cat.setCatId(rs.getInt("product_category_id"));
+                cat.setCatName(rs.getString("product_category_name"));
+                cat.setSubcatId(rs.getInt("product_subcategory_id"));
+                cat.setSubcatName(rs.getString("product_subcategory_name"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return cat;
     }
     
     public String encodeImageToBase64(String imagePath) throws Exception {

@@ -4,191 +4,238 @@
     Author     : khateeb
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8" import="pixelmart.beans.Product"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="pixelmart.beans.Product,pixelmart.beans.CategoryInfo"%>
 <%
     Product product = (Product) request.getAttribute("product");
+    CategoryInfo category = (CategoryInfo) request.getAttribute("category");
 %>
 <!DOCTYPE html>
 <html>
     <head>
-        <title><%=product.getProductName()%></title>
-        <link rel="icon"
-              type="image/x-icon"
-              href="${pageContext.request.contextPath}/images/logos/favicon.png">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <title><%=product.getProductName()%> | Pixel Mart</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/logos/favicon.png">
+        <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/css/productdisplay.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     </head>
-    <body class="bg-light">
+
+    <body class="product-page">
 
         <%@include file="/WEB-INF/views/components/navbar.jspf"%>
 
-        <div class="container mb-5">
+        <!-- =========================
+             BREADCRUMB
+        ========================== -->
 
-            <!-- Product Section -->
+        <section class="breadcrumb-section">
 
-            <div class="card border-0 shadow-sm">
+            <div class="container">
 
-                <div class="row g-0">
+                <nav aria-label="breadcrumb">
 
-                    <!-- Product Image -->
+                    <ol class="breadcrumb">
 
-                    <div class="col-lg-5 p-4">
+                        <li class="breadcrumb-item">
+                            <a href="welcome">
+                                Home
+                            </a>
+                        </li>
 
-                        <div class="bg-white rounded d-flex justify-content-center align-items-center"
-                             style="height:550px;">
+                        <li class="breadcrumb-item">
+                            <a href="prodcat?catid=<%=category.getCatId()%>">
+                                <%=category.getCatName()%>
+                            </a>
+                        </li>
 
-                            <img
-                                src="data:image/jpeg;base64,<%=request.getAttribute("imageData")%>"
-                                alt="<%=product.getProductName()%>"
-                                class="img-fluid"
-                                style="max-height:500px; object-fit:contain;">
+                        <li class="breadcrumb-item">
+                            <a href="prodld?subcatid=<%=category.getSubcatId()%>">
+                                <%=category.getSubcatName()%>
+                            </a>
+                        </li>
+
+                        <li class="breadcrumb-item active">
+                            <%=product.getProductName()%>
+                        </li>
+
+                    </ol>
+
+                </nav>
+
+            </div>
+
+        </section>
+
+        <!-- =========================
+             PRODUCT HERO
+        ========================== -->
+
+        <section class="product-hero">
+
+            <div class="container">
+
+                <div class="hero-surface">
+
+                    <div class="row align-items-center g-5">
+
+                        <!-- PRODUCT IMAGE -->
+
+                        <div class="col-lg-6">
+
+                            <div class="gallery-surface">
+                                
+                                <img src="data:image/type;base64,<%=product.getProductImagePath()%>"
+                                     alt="<%=product.getProductName()%>"
+                                     class="product-image">
+
+                            </div>
+
                         </div>
 
-                    </div>
+                        <!-- PRODUCT INFO -->
 
-                    <!-- Product Details -->
+                        <div class="col-lg-6">
 
-                    <div class="col-lg-7">
+                            <div class="purchase-panel">
 
-                        <div class="p-4">
-
-                            <h2 class="fw-bold mb-2">
-                                <%=product.getProductName()%>
-                            </h2>
-
-                            <h5 class="text-secondary mb-4">
-                                <%=product.getProductBrand()%>
-                            </h5>
-
-                            <!-- Rating Placeholder -->
-
-                            <div class="mb-3">
-
-                                <span class="badge bg-success">
-                                    ★ 4.5
+                                <span class="brand-pill">
+                                    <%=product.getProductBrand()%>
                                 </span>
 
-                                <span class="text-muted ms-2">
-                                    Ratings coming soon
-                                </span>
+                                <h1 class="product-title mt-4">
+                                    <%=product.getProductName()%>
+                                </h1>
 
-                            </div>
+                                <p class="product-subtitle">
+                                    <%=product.getProductDescription()%>
+                                </p>
 
-                            <!-- Pricing -->
+                                <div class="price-section">
 
-                            <div class="mb-4">
+                                    <h2 class="current-price">
+                                        $<%=String.format("%.2f",
+                                                product.getProductSellingPrice())%>
+                                    </h2>
 
-                                <h2 class="fw-bold text-success">
+                                    <div class="price-meta">
 
-                                    $<%=product.getProductSellingPrice()%>
+                                        <span class="old-price">
+                                            $<%=String.format("%.2f",
+                                                    product.getProductPrice())%>
+                                        </span>
 
-                                </h2>
+                                        <span class="discount-pill">
+                                            <%=String.format("%.2f",
+                                                    product.getProductDiscount())%>% OFF
+                                        </span>
 
-                                <span class="text-muted text-decoration-line-through fs-5">
+                                    </div>
 
-                                    $<%=product.getProductPrice()%>
+                                    <div class="savings-text">
 
-                                </span>
+                                        You Save
 
-                                <span class="badge bg-danger ms-2">
+                                        $<%=String.format("%.2f",
+                                                product.getProductPrice()
+                                                - product.getProductSellingPrice())%>
 
-                                    <%=product.getProductDiscount()%>% OFF
-
-                                </span>
-
-                            </div>
-
-                            <!-- Stock -->
-
-                            <div class="mb-4">
-
-                                <% if (product.getProductQuantity() > 0) { %>
-
-                                <h5 class="text-success">
-
-                                    <i class="bi bi-check-circle-fill"></i>
-                                    In Stock
-
-                                </h5>
-
-                                <% } else { %>
-
-                                <h5 class="text-danger">
-
-                                    <i class="bi bi-x-circle-fill"></i>
-                                    Out Of Stock
-
-                                </h5>
-
-                                <% }%>
-
-                            </div>
-
-                            <!-- Quantity -->
-
-                            <div class="mb-4">
-
-                                <label class="form-label fw-bold">
-
-                                    Quantity
-
-                                </label>
-
-                                <input
-                                    type="number"
-                                    value="1"
-                                    min="1"
-                                    max="<%=product.getProductQuantity()%>"
-                                    class="form-control"
-                                    style="width:120px;">
-
-                            </div>
-
-                            <!-- Buttons -->
-
-                            <div class="d-flex gap-3 mb-4">
-
-                                <button
-                                    class="btn btn-warning btn-lg px-5">
-
-                                    <i class="bi bi-cart-fill"></i>
-                                    Add To Cart
-
-                                </button>
-
-                                <button
-                                    class="btn btn-dark btn-lg px-5">
-
-                                    Buy Now
-
-                                </button>
-
-                            </div>
-
-                            <!-- Extra Info -->
-
-                            <div class="row text-muted">
-
-                                <div class="col-md-6">
-
-                                    <p>
-
-                                        <i class="bi bi-truck"></i>
-                                        Fast Delivery
-
-                                    </p>
+                                    </div>
 
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="stock-pill mt-4">
 
-                                    <p>
+                                    <i class="bi bi-check-circle-fill"></i>
 
+                                    <span>
+                                        In Stock
+                                    </span>
+
+                                    <small>
+                                        (<%=product.getProductQuantity()%> Available)
+                                    </small>
+
+                                </div>
+
+                                <div class="quantity-section mt-4">
+
+                                    <label class="quantity-label">
+                                        Quantity
+                                    </label>
+
+                                    <div class="quantity-wrapper">
+
+                                        <button id="minusBtn"
+                                                class="qty-btn">
+
+                                            <i class="bi bi-dash-lg"></i>
+
+                                        </button>
+
+                                        <span id="qtyValue">
+                                            1
+                                        </span>
+
+                                        <button id="plusBtn"
+                                                class="qty-btn">
+
+                                            <i class="bi bi-plus-lg"></i>
+
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="action-buttons">
+
+                                    <button class="btn btn-buy" onclick="buyNow(<%=product.getProductId()%>)">
+
+                                        <i class="bi bi-lightning-fill me-2"></i>
+
+                                        Buy Now
+
+                                    </button>
+
+                                    <button class="btn btn-cart" onclick="addToCart(<%=product.getProductId()%>)">
+
+                                        <i class="bi bi-cart-fill me-2"></i>
+
+                                        Add To Cart
+
+                                    </button>
+
+                                    <button class="btn btn-wishlist" onclick="toggleWishlist(<%=product.getProductId()%>)">
+
+                                        <i class="bi bi-heart"></i>
+
+                                    </button>
+
+                                </div>
+
+                                <div class="trust-pills">
+
+                                    <span class="trust-pill">
+                                        <i class="bi bi-shield-check"></i>
+                                        Secure Payment
+                                    </span>
+
+                                    <span class="trust-pill">
                                         <i class="bi bi-arrow-repeat"></i>
                                         Easy Returns
+                                    </span>
 
-                                    </p>
+                                    <span class="trust-pill">
+                                        <i class="bi bi-truck"></i>
+                                        Fast Delivery
+                                    </span>
+
+                                    <span class="trust-pill">
+                                        <i class="bi bi-patch-check"></i>
+                                        Warranty Included
+                                    </span>
 
                                 </div>
 
@@ -202,81 +249,563 @@
 
             </div>
 
-            <!-- Description -->
+        </section>
 
-            <div class="card mt-4 border-0 shadow-sm">
+        <!-- =========================
+                PRODUCT STORY
+        ========================== -->
 
-                <div class="card-body">
+        <section class="story-section">
 
-                    <h3 class="fw-bold mb-3">
+            <div class="container">
 
-                        Product Description
+                <div class="content-surface">
 
-                    </h3>
+                    <div class="section-header">
 
-                    <p class="text-secondary">
+                        <span class="section-tag">
+                            Product Story
+                        </span>
 
-                        <%=product.getProductDescription()%>
+                        <h2 class="section-title">
+                            Crafted For Everyday Excellence
+                        </h2>
+
+                    </div>
+
+                    <div class="row justify-content-center">
+
+                        <div class="col-lg-10">
+
+                            <p class="story-content">
+
+                                <%=product.getProductDescription()%>
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- =========================
+             FEATURE SHOWCASE
+        ========================== -->
+
+        <section class="feature-section">
+
+            <div class="container">
+
+                <div class="section-header text-center mb-5">
+
+                    <span class="section-tag">
+                        Why Choose This Product
+                    </span>
+
+                    <h2 class="section-title">
+                        Designed Around Your Needs
+                    </h2>
+
+                    <p class="section-subtitle">
+
+                        Premium quality, dependable performance,
+                        and a seamless ownership experience.
 
                     </p>
 
                 </div>
 
-            </div>
+                <div class="row g-4">
 
-            <!-- Specifications -->
+                    <div class="col-lg-4 col-md-6">
 
-            <div class="card mt-4 border-0 shadow-sm">
+                        <div class="feature-card">
 
-                <div class="card-body">
+                            <div class="feature-icon">
 
-                    <h3 class="fw-bold mb-4">
+                                <i class="bi bi-lightning-charge-fill"></i>
 
-                        Specifications
+                            </div>
 
-                    </h3>
+                            <h4>
+                                High Performance
+                            </h4>
 
-                    <table class="table table-borderless">
+                            <p>
 
-                        <tr>
-                            <th width="250">Brand</th>
-                            <td><%=product.getProductBrand()%></td>
-                        </tr>
+                                Engineered to deliver exceptional
+                                speed, responsiveness and reliability.
 
-                        <tr>
-                            <th>Warranty</th>
-                            <td><%=product.getProductWarranty()%></td>
-                        </tr>
+                            </p>
 
-                        <tr>
-                            <th>Dimensions</th>
-                            <td><%=product.getProductDimensions()%></td>
-                        </tr>
+                        </div>
 
-                        <tr>
-                            <th>Weight</th>
-                            <td><%=product.getProductWeight()%> kg</td>
-                        </tr>
+                    </div>
 
-                        <tr>
-                            <th>Available Quantity</th>
-                            <td><%=product.getProductQuantity()%></td>
-                        </tr>
+                    <div class="col-lg-4 col-md-6">
 
-                    </table>
+                        <div class="feature-card">
+
+                            <div class="feature-icon">
+
+                                <i class="bi bi-shield-check"></i>
+
+                            </div>
+
+                            <h4>
+                                Trusted Quality
+                            </h4>
+
+                            <p>
+
+                                Manufactured using premium materials
+                                and backed by quality assurance.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-4 col-md-6">
+
+                        <div class="feature-card">
+
+                            <div class="feature-icon">
+
+                                <i class="bi bi-stars"></i>
+
+                            </div>
+
+                            <h4>
+                                Premium Experience
+                            </h4>
+
+                            <p>
+
+                                Thoughtfully designed to provide a
+                                smooth and enjoyable experience.
+
+                            </p>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
             </div>
 
-        </div>
+        </section>
 
-        <%@include file="components/footer.jspf" %>
+        <!-- =========================
+             SPECIFICATIONS
+        ========================== -->
 
-        <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
-        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-        <script src="${pageContext.request.contextPath}/js/indexpage.js"></script>
+        <section class="specification-section">
+
+            <div class="container">
+
+                <div class="section-header text-center mb-5">
+
+                    <span class="section-tag">
+                        Technical Details
+                    </span>
+
+                    <h2 class="section-title">
+                        Specifications
+                    </h2>
+
+                    <p class="section-subtitle">
+
+                        Everything you need to know about
+                        this product at a glance.
+
+                    </p>
+
+                </div>
+
+                <div class="spec-grid">
+
+                    <div class="spec-card">
+
+                        <span class="spec-label">
+
+                            Brand
+
+                        </span>
+
+                        <strong class="spec-value">
+
+                            <%=product.getProductBrand()%>
+
+                        </strong>
+
+                    </div>
+
+                    <div class="spec-card">
+
+                        <span class="spec-label">
+
+                            Warranty
+
+                        </span>
+
+                        <strong class="spec-value">
+
+                            <%=product.getProductWarranty()%>
+
+                        </strong>
+
+                    </div>
+
+                    <div class="spec-card">
+
+                        <span class="spec-label">
+
+                            Weight
+
+                        </span>
+
+                        <strong class="spec-value">
+
+                            <%=product.getProductWeight()%> kg
+
+                        </strong>
+
+                    </div>
+
+                    <div class="spec-card">
+
+                        <span class="spec-label">
+
+                            Dimensions
+
+                        </span>
+
+                        <strong class="spec-value">
+
+                            <%=product.getProductDimensions()%>
+
+                        </strong>
+
+                    </div>
+
+                    <div class="spec-card">
+
+                        <span class="spec-label">
+
+                            Available Stock
+
+                        </span>
+
+                        <strong class="spec-value">
+
+                            <%=product.getProductQuantity()%> Units
+
+                        </strong>
+
+                    </div>
+
+                    <div class="spec-card">
+
+                        <span class="spec-label">
+
+                            Category
+
+                        </span>
+
+                        <strong class="spec-value">
+
+                            <%=category.getCatName()%>
+
+                        </strong>
+
+                    </div>
+
+                    <div class="spec-card">
+
+                        <span class="spec-label">
+
+                            Subcategory
+
+                        </span>
+
+                        <strong class="spec-value">
+
+                            <%=category.getSubcatName()%>
+
+                        </strong>
+
+                    </div>
+
+                    <div class="spec-card">
+
+                        <span class="spec-label">
+
+                            Product ID
+
+                        </span>
+
+                        <strong class="spec-value">
+
+                            #<%=product.getProductId()%>
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- =========================
+                TRUST & DELIVERY
+        ========================== -->
+
+        <section class="delivery-section">
+
+            <div class="container">
+
+                <div class="section-header text-center mb-5">
+
+                    <span class="section-tag">
+                        Shop With Confidence
+                    </span>
+
+                    <h2 class="section-title">
+                        Trusted By Thousands Of Customers
+                    </h2>
+
+                    <p class="section-subtitle">
+
+                        Secure shopping experience designed to
+                        make every purchase simple and worry-free.
+
+                    </p>
+
+                </div>
+
+                <div class="delivery-surface">
+
+                    <div class="row g-4">
+
+                        <div class="col-lg-3 col-md-6">
+
+                            <div class="delivery-card">
+
+                                <div class="delivery-icon">
+
+                                    <i class="bi bi-truck"></i>
+
+                                </div>
+
+                                <h5>
+                                    Fast Delivery
+                                </h5>
+
+                                <p>
+
+                                    Quick and reliable shipping
+                                    right to your doorstep.
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-3 col-md-6">
+
+                            <div class="delivery-card">
+
+                                <div class="delivery-icon">
+
+                                    <i class="bi bi-arrow-repeat"></i>
+
+                                </div>
+
+                                <h5>
+                                    Easy Returns
+                                </h5>
+
+                                <p>
+
+                                    Hassle-free return process
+                                    for complete peace of mind.
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-3 col-md-6">
+
+                            <div class="delivery-card">
+
+                                <div class="delivery-icon">
+
+                                    <i class="bi bi-shield-lock"></i>
+
+                                </div>
+
+                                <h5>
+                                    Secure Payments
+                                </h5>
+
+                                <p>
+
+                                    Protected transactions
+                                    with trusted payment gateways.
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-3 col-md-6">
+
+                            <div class="delivery-card">
+
+                                <div class="delivery-icon">
+
+                                    <i class="bi bi-patch-check"></i>
+
+                                </div>
+
+                                <h5>
+                                    Genuine Products
+                                </h5>
+
+                                <p>
+
+                                    Authentic products sourced
+                                    directly from trusted sellers.
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- =========================
+             RELATED PRODUCTS
+        ========================== -->
+
+        <section class="related-section">
+
+            <div class="container">
+
+                <div class="section-header text-center mb-5">
+
+                    <span class="section-tag">
+                        Discover More
+                    </span>
+
+                    <h2 class="section-title">
+                        Similar Products
+                    </h2>
+
+                    <p class="section-subtitle">
+
+                        Explore products related to your interests.
+
+                    </p>
+
+                </div>
+
+                <div id="relatedProducts">
+
+                    <div class="row g-4">
+
+                        <!-- AJAX Loaded Products -->
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- =========================
+             NEWSLETTER
+        ========================== -->
+
+        <section class="newsletter-section">
+
+            <div class="container">
+
+                <div class="newsletter-surface">
+
+                    <div class="row align-items-center">
+
+                        <div class="col-lg-7">
+
+                            <h2 class="newsletter-title">
+
+                                Stay Updated With PixelMart
+
+                            </h2>
+
+                            <p class="newsletter-text">
+
+                                Get updates on new arrivals,
+                                exclusive offers and trending products.
+
+                            </p>
+
+                        </div>
+
+                        <div class="col-lg-5">
+
+                            <div class="newsletter-form">
+
+                                <input type="email"
+                                       class="form-control newsletter-input"
+                                       placeholder="Enter your email">
+
+                                <button class="btn newsletter-btn">
+
+                                    Subscribe
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <%@include file="/WEB-INF/views/components/footer.jspf"%>
+
         <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 
+        <script src="${pageContext.request.contextPath}/js/productdisplay.js"></script>
+
     </body>
+
 </html>

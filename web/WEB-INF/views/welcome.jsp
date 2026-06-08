@@ -19,9 +19,9 @@
         <link href="${pageContext.request.contextPath}/css/welcome.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     </head>
-    <body class="bg-light" onload="loadProducts('trends', 'trending'); loadProducts('deals', 'bestDeals'); loadProducts('new', 'latest'); loadCategories('category');" id="welcome">
+    <body class="bg-light" onload="loadProducts('trends', 'trending'); loadProducts('deals', 'bestDeals'); loadProducts('new', 'latest'); loadCategoriesDropdown();" id="welcome">
 
-        <header>
+        <header id="header" class="sticky-top">
 
             <%@include file="components/welcome/banner.jspf"%>
 
@@ -99,6 +99,7 @@
         <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
         <script src="${pageContext.request.contextPath}/js/indexpage.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/js/welcome.js" type="text/javascript"></script>
-        <script src="${pageContext.request.contextPath}/js/bootstrap.js" type="text/javascript"></script>
+        <!--<script src="${pageContext.request.contextPath}/js/bootstrap.js" type="text/javascript"></script>-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>

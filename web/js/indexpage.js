@@ -151,19 +151,12 @@ let loadSubcategories = function (catid, subcategory) {
 
 //Product Cards on Welcome
 let loadProducts = function (type, target) {
-
     let xhr = new XMLHttpRequest();
-
     xhr.onreadystatechange = function () {
-
         if (xhr.readyState === 4) {
-
             if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
-
                 let jarr = JSON.parse(xhr.responseText);
-
-                let cards = jarr.map((obj, index) =>
-                    React.createElement(
+                let cards = jarr.map((obj, index) => React.createElement(
                             "div",
                             {
                                 className: "col-lg-3 col-md-4 col-sm-6 mb-4",
@@ -172,7 +165,7 @@ let loadProducts = function (type, target) {
                             React.createElement(
                                     "a",
                                     {
-                                        href: `proddtls?id=${obj.product_id}`,
+                                        href: `proddtls?pid=${obj.product_id}&sid=${obj.product_subcategory_id}`,
                                         className: "text-decoration-none text-dark"
                                     },
                                     React.createElement(
@@ -190,12 +183,9 @@ let loadProducts = function (type, target) {
                                                     React.createElement(
                                                             "img",
                                                             {
-                                                                src:
-                                                                        `data:image/${obj.type};base64,${obj.product_image_data}`,
-                                                                alt:
-                                                                        obj.product_name,
-                                                                className:
-                                                                        "trending-img"
+                                                                src: `data:image/${obj.type};base64,${obj.product_image_data}`,
+                                                                alt: obj.product_name,
+                                                                className: "trending-img"
                                                             }
                                                     )
                                                     ),
@@ -208,38 +198,33 @@ let loadProducts = function (type, target) {
                                                     React.createElement(
                                                             "h6",
                                                             {
-                                                                className:
-                                                                        "fw-bold mb-1"
+                                                                className: "fw-bold mb-1"
                                                             },
                                                             obj.product_name
                                                             ),
                                                     React.createElement(
                                                             "small",
                                                             {
-                                                                className:
-                                                                        "text-muted"
+                                                                className: "text-muted"
                                                             },
                                                             obj.product_brand
                                                             ),
                                                     React.createElement(
                                                             "div",
                                                             {
-                                                                className:
-                                                                        "mt-2 text-warning"
+                                                                className: "mt-2 text-warning"
                                                             },
                                                             "⭐⭐⭐⭐"
                                                             ),
                                                     React.createElement(
                                                             "div",
                                                             {
-                                                                className:
-                                                                        "mt-2"
+                                                                className: "mt-2"
                                                             },
                                                             React.createElement(
                                                                     "span",
                                                                     {
-                                                                        className:
-                                                                                "discount-badge"
+                                                                        className: "discount-badge"
                                                                     },
                                                                     `${obj.product_discount}% OFF`
                                                                     )
@@ -247,8 +232,7 @@ let loadProducts = function (type, target) {
                                                     React.createElement(
                                                             "h5",
                                                             {
-                                                                className:
-                                                                        "fw-bold mt-3 mb-0 text-success"
+                                                                className: "fw-bold mt-3 mb-0 text-success"
                                                             },
                                                             "$" + obj.product_selling_price
                                                             )
@@ -257,7 +241,6 @@ let loadProducts = function (type, target) {
                                     )
                             )
                 );
-
                 let container = React.createElement(
                         "div",
                         {
@@ -271,21 +254,11 @@ let loadProducts = function (type, target) {
                                 cards
                                 )
                         );
-
-                ReactDOM.render(
-                        container,
-                        document.getElementById(target)
-                        );
+                ReactDOM.render(container, document.getElementById(target));
             }
         }
     };
-
-    xhr.open(
-            "GET",
-            "http://localhost:8080/pixelmart/fc/prodld?type=" + type,
-            true
-            );
-
+    xhr.open("GET", "http://localhost:8080/pixelmart/fc/prodld?type=" + type, true);
     xhr.send(null);
 };
 function navbtn() {
@@ -299,13 +272,15 @@ function navbtn() {
                     'data-bs-toggle': "modal",
                     'data-bs-target': "#signupmodal"
                 }, "Sign Up");
-    } else if (page === "welcome") {
+    } else if (page === "welcome" || page === "subcategorypg" || page === "productdisplaypg") {
         button = React.createElement(
-                "div", null,
+                "div", {
+                    className: "d-flex justify-content-end align-items-center"
+                },
                 // Cart Button
                 React.createElement(
                         "button", {
-                            className: "btn btn-outline-light rounded-pill px-3 m-1",
+                            className: "btn btn-outline-light rounded-pill px-3 me-2",
                             type: "button"
                         }, React.createElement(
                         "i", {
@@ -317,7 +292,7 @@ function navbtn() {
                 React.createElement(
                         "a", {
                             href: "index",
-                            className: "btn btn-outline-light rounded-pill px-3 m-1"
+                            className: "btn btn-outline-light rounded-pill px-3"
                         },
                         React.createElement(
                                 "i", {
@@ -329,25 +304,25 @@ function navbtn() {
         button = React.createElement(
                 "a", {
                     href: "index",
-                    className: "btn btn-light shadow-none col-md-6 my-3"
+                    className: "btn btn-light shadow-none my-2"
                 }, "Logout");
     } else if (page === "buyerpg") {
         button = React.createElement(
                 "a", {
                     href: "index",
-                    className: "btn btn-light shadow-none col-md-6 my-3"
+                    className: "btn btn-light shadow-none my-2"
                 }, "Logout");
     } else if (page === "invalidpg") {
         button = React.createElement(
                 "a", {
                     href: "index",
-                    className: "btn btn-light shadow-none my-3"
+                    className: "btn btn-light shadow-none my-2"
                 }, "Back to Home");
     } else if (page === "sellerpg") {
         button = React.createElement(
                 "a", {
                     href: "sellersignin",
-                    className: "btn btn-light shadow-none col-md-6 my-3"
+                    className: "btn btn-light shadow-none my-2"
                 }, "Logout");
     } else if (page === "slrsigninpg") {
         button = React.createElement(
@@ -362,46 +337,20 @@ function navbtn() {
 ReactDOM.render(React.createElement(navbtn, null, null), document.getElementById("navbutton"));
 
 let fetchApiImportProducts = function () {
-
-    let spinner =
-            document.getElementById(
-                    "importSpinner"
-                    );
-
-    let status =
-            document.getElementById(
-                    "importStatus"
-                    );
-
+    let spinner = document.getElementById("importSpinner");
+    let status = document.getElementById("importStatus");
     spinner.classList.remove("d-none");
-
     status.innerHTML = "";
-
     let xhr = new XMLHttpRequest();
-
     xhr.onreadystatechange = function () {
-
         if (xhr.readyState === 4) {
-
             spinner.classList.add("d-none");
-
             if (xhr.status === 200) {
-
-                status.innerHTML =
-                        "✅ Products imported successfully!";
-
-                status.classList.add(
-                        "text-success"
-                        );
-
+                status.innerHTML = "✅ Products imported successfully!";
+                status.classList.add("text-success");
             } else {
-
-                status.innerHTML =
-                        "❌ Import failed!";
-
-                status.classList.add(
-                        "text-danger"
-                        );
+                status.innerHTML = "❌ Import failed!";
+                status.classList.add("text-danger");
             }
         }
     };
@@ -411,131 +360,109 @@ let fetchApiImportProducts = function () {
     xhr.send(null);
 };
 
-let productView = function (pid) {
+// Category Dropdown for Navbar
+function loadCategoriesDropdown() {
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
+            if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
+                let jarr = JSON.parse(xhr.responseText);
+                let html = "";
+                jarr.forEach(obj => {
+                    html +=
+                            `<li>
+                                <a class="dropdown-item" href="prodcat?catid=${obj.id}">
+                                    ${obj.name}
+                                </a>
+                            </li>`;
+                });
+                document.getElementById("categoryMenu").innerHTML = html;
             }
         }
     };
-    let url = "http://localhost:8080/pixelmart/fc/proddtls?id=" + pid;
-    xhr.open("GET", url, true);
 
+    xhr.open("GET", "http://localhost:8080/pixelmart/fc/prodcat?type=json", true);
     xhr.send(null);
-};
+}
 
 let showSubcategoryCards = function (catid) {
-
     let xhr = new XMLHttpRequest();
-
     xhr.onreadystatechange = function () {
-
         if (xhr.readyState === 4) {
-
-            if ((xhr.status >= 200 && xhr.status < 300)
-                    || xhr.status === 304) {
-
-                let jarr =
-                        JSON.parse(xhr.responseText);
-
-                let cards =
-                        jarr.map((obj, index) =>
+            if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
+                let jarr = JSON.parse(xhr.responseText);
+                let cards = jarr.map((obj, index) => React.createElement(
+                            "div",
+                            {
+                                className: "col-lg-4 col-md-6 mb-4",
+                                key: index
+                            },
                             React.createElement(
-                                    "div",
+                                    "a",
                                     {
-                                        className:
-                                                "col-lg-4 col-md-6 mb-4",
-                                        key: index
+                                        href: `prodcat?type=data&subcatid=${obj.id}`,
+                                        className: "text-decoration-none"
                                     },
                                     React.createElement(
-                                            "a",
+                                            "div",
                                             {
-                                                href:
-                                                        `prodld?subcatid=${obj.id}`,
-                                                className:
-                                                        "text-decoration-none"
+                                                className: "subcategory-card"
                                             },
                                             React.createElement(
                                                     "div",
                                                     {
-                                                        className:
-                                                                "subcategory-card"
+                                                        className: "subcategory-title"
+                                                    },
+                                                    obj.name
+                                                    ),
+                                            React.createElement(
+                                                    "div",
+                                                    {
+                                                        className: "subcategory-desc"
+                                                    },
+                                                    "Browse products, explore collections and discover top brands."
+                                                    ),
+                                            React.createElement(
+                                                    "div",
+                                                    {
+                                                        className: "subcategory-footer"
                                                     },
                                                     React.createElement(
-                                                            "div",
+                                                            "span",
                                                             {
-                                                                className:
-                                                                        "subcategory-title"
+                                                                className: "subcategory-link"
                                                             },
-                                                            obj.name
+                                                            "Explore Collection"
                                                             ),
                                                     React.createElement(
                                                             "div",
                                                             {
-                                                                className:
-                                                                        "subcategory-desc"
-                                                            },
-                                                            "Browse products, explore collections and discover top brands."
-                                                            ),
-                                                    React.createElement(
-                                                            "div",
-                                                            {
-                                                                className:
-                                                                        "subcategory-footer"
+                                                                className: "arrow-circle"
                                                             },
                                                             React.createElement(
-                                                                    "span",
+                                                                    "i",
                                                                     {
-                                                                        className:
-                                                                                "subcategory-link"
-                                                                    },
-                                                                    "Explore Collection"
-                                                                    ),
-                                                            React.createElement(
-                                                                    "div",
-                                                                    {
-                                                                        className:
-                                                                                "arrow-circle"
-                                                                    },
-                                                                    React.createElement(
-                                                                            "i",
-                                                                            {
-                                                                                className:
-                                                                                        "bi bi-arrow-right"
-                                                                            }
-                                                                    )
-                                                                    )
+                                                                        className: "bi bi-arrow-right"
+                                                                    }
+                                                            )
                                                             )
                                                     )
                                             )
                                     )
+                            )
+                );
+                let container = React.createElement(
+                        "div",
+                        {
+                            className: "row"
+                        },
+                        cards
                         );
 
-                let container =
-                        React.createElement(
-                                "div",
-                                {
-                                    className: "row"
-                                },
-                                cards
-                                );
-
-                ReactDOM.render(
-                        container,
-                        document.getElementById(
-                                "subcategoryContainer"
-                                )
-                        );
+                ReactDOM.render(container, document.getElementById("subcategoryContainer"));
             }
         }
     };
-
-    xhr.open(
-            "GET",
-            `http://localhost:8080/pixelmart/fc/prodsubcat?catid=${catid}&type=json`,
-            true
-            );
-
+    xhr.open("GET", `http://localhost:8080/pixelmart/fc/prodsubcat?catid=${catid}&type=json`, true);
     xhr.send(null);
 };
